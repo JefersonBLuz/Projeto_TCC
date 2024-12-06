@@ -11,10 +11,10 @@ import { console } from "inspector";
 
 // * Método responsavél por criar um novo usuário:
 const createUser = async (req: Request, res: Response) => {
-    const { nameuser, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
+    const { name, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
     try {
         const rows = await db.insert(users).values({
-            name: nameuser,
+            name: name,
             active: active? active: true,
             address: address,
             birthday: birthday,
@@ -112,10 +112,10 @@ const viewUsersWithAddressId = async (req: Request, res: Response) => {
 // * Método responsavél por atualizar dados do usuário:
 const updateUser = async (req: Request, res: Response) => {
     const { id } = req.params
-    const { nameuser, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
+    const { name, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
     try {
         const rows = await db.update(users).set({
-            name: nameuser,
+            name: name,
             active: active? active: true,
             address: address,
             birthday: birthday,
