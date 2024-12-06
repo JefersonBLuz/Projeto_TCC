@@ -16,17 +16,17 @@ const router = createRouter({
         {
           path: 'create',
           name: 'Criar usuário',
-          component: () => import('@/views/users/create-user/UserCreateComponent.vue'),
+          component: () => import('@/views/users/create-user/UserCreateView.vue'),
         }, 
         {
           path: 'list',
           name: 'Listar Usuários',
-          component: () => import('@/views/users/list-user/UserListComponent.vue'),
+          component: () => import('@/views/users/list-user/UserListView.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Usuário',
-          component: () => import('@/views/users/update-user/UserUpdateComponent.vue'),
+          component: () => import('@/views/users/update-user/UserUpdateView.vue'),
         }
       ]
     },
