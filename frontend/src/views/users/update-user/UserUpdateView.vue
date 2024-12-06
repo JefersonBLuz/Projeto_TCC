@@ -1,11 +1,10 @@
 <script lang="ts">
 import UserService from '@/services/UsersService';
 export default {
-    name: 'UserUpdateComponent',
+    name: 'UserUpdateView',
     data() {
         return {
             userForm: {
-                address: 2,
             },
             addressForm:{
 

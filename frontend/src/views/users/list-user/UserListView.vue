@@ -1,7 +1,7 @@
 <script lang="ts">
 import UserService from '@/services/UsersService';
 export default {
-    name: 'UserListComponent',
+    name: 'UserListView',
     data() {
         return {
             users: []

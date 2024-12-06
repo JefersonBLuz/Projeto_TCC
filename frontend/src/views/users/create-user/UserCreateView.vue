@@ -2,7 +2,7 @@
 import UserService from '@/services/UsersService';
 
 export default {
-    name: 'UserCreateComponents',
+    name: 'UserCreateView',
     data() {
         return {
             userForm: {
