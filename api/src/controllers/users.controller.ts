@@ -11,10 +11,10 @@ import { console } from "inspector";
 
 // * Método responsavél por criar um novo usuário:
 const createUser = async (req: Request, res: Response) => {
-    const { nameuser, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
+    const { name, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
     try {
         const rows = await db.insert(users).values({
-            name: nameuser,
+            name: name,
             active: active? active: true,
             address: address,
             birthday: birthday,
@@ -55,9 +55,9 @@ const viewUsersAll = async (req: Request, res: Response) => {
 }
 // * Método responsavél listar usuário especifico:
 const viewUser = async (req: Request, res: Response) => {
-    const { id } = req.params;
+    const { name } = req.params;
     try {
-        const rows = await db.select().from(users).where(eq(users.id, Number(id))
+        const rows = await db.select().from(users).where(eq(users.name, name)
         );
         res.status(200).send(rows);
     } catch (error) {
@@ -83,6 +83,20 @@ const viewUsersAllWithAddress = async (req: Request, res: Response) => {
 }
 // * Método responsavél listar usuário específico e seu endereço:
 const viewUsersWithAddress = async (req: Request, res: Response) => {
+    const { name } = req.params
+    try {
+        const rows = await db.select().from(users).where(eq(users.name, name)).innerJoin(address, eq(users.address, address.id));
+        res.status(200).send(rows);
+    } catch (error) {
+        console.error('viewUsersWithAddress: ', error);
+        res.status(500).send({
+            message: 'Ocorreu um erro.',
+            error: error
+        });
+    }
+}
+// * Método responsavél listar usuário específico e seu endereço:
+const viewUsersWithAddressId = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         const rows = await db.select().from(users).where(eq(users.id, Number(id))).innerJoin(address, eq(users.address, address.id));
@@ -98,10 +112,10 @@ const viewUsersWithAddress = async (req: Request, res: Response) => {
 // * Método responsavél por atualizar dados do usuário:
 const updateUser = async (req: Request, res: Response) => {
     const { id } = req.params
-    const { nameuser, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
+    const { name, birthday, address, email, cpf, cellphone, password, privileges, active } = req.body;
     try {
         const rows = await db.update(users).set({
-            name: nameuser,
+            name: name,
             active: active? active: true,
             address: address,
             birthday: birthday,
@@ -139,4 +153,4 @@ const deleteUser = async (req: Request, res: Response) => {
     }
 }
 
-export default { viewUsersAll, createUser, viewUser, viewUsersAllWithAddress, viewUsersWithAddress, updateUser, deleteUser }
+export default { viewUsersAll, createUser, viewUser, viewUsersAllWithAddress, viewUsersWithAddress, updateUser, deleteUser, viewUsersWithAddressId }
