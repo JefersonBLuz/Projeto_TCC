@@ -1,7 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import UserCreateComponent from '@/components/users/create-user/UserCreateComponent.vue';
-import UserListComponent from '@/components/users/list-user/UserListComponent.vue';
-import UserUpdateComponent from '@/components/users/update-user/UserUpdateComponent.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,22 +11,22 @@ const router = createRouter({
     {
       path: '/users',
       name: 'users',
-      component: () => import('@/views/Users.vue'),
+      component: () => import('@/views/users/Users.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar usuário',
-          component: UserCreateComponent,
+          component: () => import('@/views/users/create-user/UserCreateComponent.vue'),
         }, 
         {
           path: 'list',
           name: 'Listar Usuários',
-          component: UserListComponent,
+          component: () => import('@/views/users/list-user/UserListComponent.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Usuário',
-          component: UserUpdateComponent,
+          component: () => import('@/views/users/update-user/UserUpdateComponent.vue'),
         }
       ]
     },
