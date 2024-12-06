@@ -8,12 +8,14 @@ const usersController = UserController
 router.post('/createUser', usersController.createUser)
 // * Rota responsável por lsitar todos os usuários: (GET): localhost:3000/users/view
 router.get('/view', usersController.viewUsersAll)
-// * Rota responsável por listar usuário especifico: (GET): localhost:3000/users/view/:id
+// * Rota responsável por listar usuário especifico: (GET): localhost:3000/users/view/:name
 router.get('/view/:name', usersController.viewUser)
 // * Rota responsável por listar usuário especifico: (GET): localhost:3000/users/viewaddress
 router.get('/viewaddress', usersController.viewUsersAllWithAddress)
-// * Rota responsável por listar usuário especifico: (GET): localhost:3000/users/viewaddress/:id
+// * Rota responsável por listar usuário especifico: (GET): localhost:3000/users/viewaddress/:name
 router.get('/viewaddress/:name', usersController.viewUsersWithAddress)
+// * Rota responsável por listar usuário especifico: (GET): localhost:3000/users/viewaddressid/:id
+router.get('/viewaddressid/:id', usersController.viewUsersWithAddressId)
 // * Rota responsável por listar usuário especifico: (PUT): localhost:3000/users/update/:id
 router.put('/update/:id', usersController.updateUser)
 // * Rota responsável por listar usuário especifico: (DELETE): localhost:3000/users/delete/:id
