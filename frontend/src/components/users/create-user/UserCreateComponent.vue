@@ -5,10 +5,10 @@ export default {
     name: 'UserCreateComponents',
     data() {
         return {
-            user: {
-                nameuser: null,
+            userForm: {
+                name: null,
                 active: null,
-                address: null,
+                address: 2,
                 cellphone: null,
                 birthday: null,
                 cpf: null,
@@ -31,7 +31,8 @@ export default {
         },
         async submitNewUser(){
             try {
-                await UserService.postUser(this.user);
+                console.log(this.userForm);
+                await UserService.postUser(this.userForm);
                 this.$router.push({
                     name: 'Listar Usuários'
                 })
@@ -47,22 +48,22 @@ export default {
         <p class="text-5xl mt-5 mb-5">Criação de Usuário</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <label for="nameuser">Nome Completo</label>
-            <input type="text" v-model="user.nameuser" :class="{'is-invalid': isSubmitted }" id="nameuser" name="nameuser" placeholder="Nome completo">
+            <input type="text" v-model="userForm.name" :class="{'is-invalid': isSubmitted }" id="nameuser" name="nameuser" placeholder="Nome completo">
             <label for="birthday">Nascimento</label>
-            <input type="text" v-model="user.birthday" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
+            <input type="text" v-model="userForm.birthday" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
             <label for="cellphone">Telefone</label>
-            <input type="text" v-model="user.cellphone" id="cellphone" name="cellphone" placeholder="5577912341234">
+            <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone" placeholder="5577912341234">
             <label for="cpf">CPF</label>
-            <input type="text" v-model="user.cpf" id="cpf" name="cpf" placeholder="12312312355">
+            <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
             <label for="email">Email</label>
-            <input type="text" v-model="user.email" id="email" name="email" placeholder="email@email.com">
+            <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
             <label for="password">Senha</label>
-            <input type="password" v-model="user.password">
+            <input type="password" v-model="userForm.password">
             <label for="privileges">Privilegios</label>
-            <input type="text" v-model="user.privileges">
+            <input type="text" v-model="userForm.privileges">
             <p>
                 <label for="active">Ativo</label>
-                <input class="size-4" type="checkbox" v-model="user.active">
+                <input class="size-4" type="checkbox" v-model="userForm.active">
             </p>
             <br>
             <div class="flex">
