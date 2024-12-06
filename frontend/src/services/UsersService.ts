@@ -30,11 +30,11 @@ const getUsers = async () => {
 
 /**
  * Método responsável por listar 'Usuário' por 'name' sem 'Address'.
- * (GET): localhost:3000/users/view/:id
+ * (GET): localhost:3000/users/view/:name
  */
 const getUserName = async (name: string) => {
     try {
-        const response = await fetch(`http://127.0.0.1:8082/users/view/${name}`, {
+        const response = await fetch(`http://localhost:8082/users/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const getUserName = async (name: string) => {
  */
 const postUser = async (user: any) => {
     try {
-        const response = await fetch('http://127.0.0.1:8082/users/createUser', {
+        const response = await fetch('http://localhost:8082/users/createUser', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const postUser = async (user: any) => {
 const updateUser = async (user: any) => {
     try {
         const id: number = user.id;
-        const response = await fetch(`http://127.0.0.1:8082/users/update/${id}`, {
+        const response = await fetch(`http://localhost:8082/users/update/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ const updateUser = async (user: any) => {
  */
 const deleteUser = async (id: number) => {
     try {
-        const response = await fetch(`http://127.0.0.1:8082/users/delete/${id}`, {
+        const response = await fetch(`http://localhost:8082/users/delete/${id}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
@@ -118,7 +118,7 @@ const deleteUser = async (id: number) => {
 
 /**
  * Método responsável por listar todos os 'Usuários' com 'Address'
- * (GET): localhost:3000/users/view
+ * (GET): localhost:3000/users/viewaddress
  */
 const getUsresAddressAll = async () => {
     try {
@@ -140,11 +140,11 @@ const getUsresAddressAll = async () => {
 
 /**
  * Método responsável por listar 'Usuário' por 'name' com 'Address'.
- * (GET): localhost:3000/users/view/:id
+ * (GET): localhost:3000/users/viewaddress/:name
  */
 const getUsresAddress = async (name: string) => {
     try {
-        const response = await fetch(`http://127.0.0.1:8082/users/viewaddress/${name}`, {
+        const response = await fetch(`http://localhost:8082/users/viewaddress/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -157,4 +157,22 @@ const getUsresAddress = async (name: string) => {
     }
 }
 
-export default { postUser, getUsers, getUserName, updateUser, deleteUser, getUsresAddressAll, getUsresAddress }
+/**
+ * Método responsável por listar 'Usuário' por 'name' com 'Address'.
+ * (GET): localhost:3000/users/viewaddressid/:id
+ */
+const getUsresAddressId = async (id: string) => {
+    try {
+        const response = await fetch(`http://localhost:8082/users/viewaddressid/${id}`, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const res = await response.json()
+        return res;
+    } catch (error) {
+        return console.error('Erro: ', error)
+    }
+}
+export default { postUser, getUsers, getUserName, updateUser, deleteUser, getUsresAddressAll, getUsresAddress, getUsresAddressId }
