@@ -10,7 +10,7 @@ export default {
             userForm: {
                 name: null,
                 active: null,
-                address: null,
+                address: 1,
                 cellphone: null,
                 birthday: null,
                 cpf: null,
@@ -41,25 +41,30 @@ export default {
             this.isSubmitted = true
             console.log('Submit successfull')
         },
-        async submitNewAddress(){
+        async submitNewAddress() {
             try {
                 console.log(this.addressForm);
                 const res = await AddressService.postAddress(this.addressForm)
-                console.log(res)
-                return res
+                console.log(res.body.address.rows[0].id)
+                return res.body.address.rows[0].id
             } catch (error) {
-                
+
             }
         },
         async submitNewUser() {
             try {
+                const response = await this.submitNewAddress()
+                console.log(response);
+                
+                this.userForm.address = response
                 console.log(this.userForm);
                 await UserService.postUser(this.userForm);
                 this.$router.push({
                     name: 'Listar Usuários'
                 })
             } catch (error) {
-                console.error(error)
+                console.error('Erro:', error)
+                return error
             }
         }
     },
@@ -113,9 +118,52 @@ export default {
                 </div>
             </div>
             <br>
-            <router-view>
-                <AddressCreateComponent></AddressCreateComponent>
-            </router-view>
+            <!-- <AddressCreateComponent /> -->
+            <hr>
+            <!--Div enderço Inicio-->
+            <div class="flex">
+                <div class="flex-1 p-2">
+                    <label for="cep">CEP</label>
+                    <input type="text" v-model="addressForm.cep" id="cep" name="cep" placeholder="45000000">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="number">Número</label>
+                    <input type="text" v-model="addressForm.number" id="number" name="number" placeholder="000">
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex-1 p-2">
+                    <label for="street">Rua</label>
+                    <input type="text" v-model="addressForm.street" id="street" name="street"
+                        placeholder="Av. Rua">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="neighborhood">Bairro</label>
+                    <input type="text" v-model="addressForm.neighborhood" id="neighborhood" name="neighborhood"
+                        placeholder="Bairro">
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex-1 p-2">
+                    <label for="city">Cidade</label>
+                    <input type="text" v-model="addressForm.city" id="city" name="city" placeholder="Vitória da Conquista-BA">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="state">Estado</label>
+                    <input type="state" v-model="addressForm.state">
+                </div>
+            </div>
+            <div class="flex">
+                <div class="flex-1 p-2">
+                    <label for="latitude">Latitude</label>
+                    <input type="text" v-model="addressForm.latitude">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="longitude">Longitude</label>
+                    <input type="text" v-model="addressForm.longitude">
+                </div>
+            </div>
+            <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
                 <button @click="submitNewUser"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
