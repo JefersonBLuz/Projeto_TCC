@@ -4,19 +4,19 @@ import AddressService from '@/services/AddressService';
 import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
 
 export default {
-    name: 'UserCreateView',
+    name: 'MemberFamilyCreateView',
     data() {
         return {
             userForm: {
-                name: null,
-                active: null,
-                address: 1,
-                cellphone: null,
-                birthday: null,
-                cpf: null,
-                email: null,
-                password: null,
-                privileges: null,
+            name: null,
+            // address: null,
+            birthday: null,
+            cellphone: null,
+            cpf: null,
+            email: null,
+            head_id: null,
+            created_by: null,
+            updated_by: null,
             },
             addressForm: {
                 cep: null,
@@ -60,7 +60,7 @@ export default {
                 console.log(this.userForm);
                 await UserService.postUser(this.userForm);
                 this.$router.push({
-                    name: 'Listar Usuários'
+                    name: 'Listar Membros da Família'
                 })
             } catch (error) {
                 console.error('Erro:', error)
@@ -72,13 +72,17 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Usuário</p>
+        <p class="text-5xl mt-5 mb-5">Criação de Membro da Família</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="nameuser">Nome Completo</label>
-                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
-                        name="nameuser" placeholder="Nome completo">
+                    <label for="namedriver">Nome Completo</label>
+                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="namedriver"
+                        name="namedriver" placeholder="Nome completo">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="cpf">CPF</label>
+                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="birthday">Nascimento</label>
@@ -93,24 +97,25 @@ export default {
                         placeholder="5577912341234">
                 </div>
                 <div class="flex-1 p-2">
-                    <label for="cpf">CPF</label>
-                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
                     <label for="email">Email</label>
                     <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
                 </div>
+            </div>
+            <div>
                 <div class="flex-1 p-2">
-                    <label for="password">Senha</label>
-                    <input type="password" v-model="userForm.password">
+                     <label for="head_id">Responsável</label> <!-- Referência ao headFamily -->
+                    <input type="text" v-model="userForm.head_id">
                 </div>
             </div>
             <div class="flex">
+                
                 <div class="flex-1 p-2">
-                    <label for="privileges">Privilegios</label>
-                    <input type="text" v-model="userForm.privileges">
+                    <label for="created_by">Criado por</label>
+                    <input type="text" v-model="userForm.created_by">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="updated_by">Atualizado em</label>
+                    <input type="text" v-model="userForm.updated_by">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="active">Ativo</label>
@@ -165,7 +170,7 @@ export default {
             </div>
             <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
-                <button @click="submitNewUser"
+                <button @click="submitNewMember"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
                     type="submit">Enviar</button>
             </div>

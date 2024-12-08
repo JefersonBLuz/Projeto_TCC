@@ -53,49 +53,49 @@ const router = createRouter({
       ]
     },
     {
-      path: '/family',
-      name: 'family',
-      component: () => import('@/views/family/Family.vue'),
+      path: '/members',
+      name: 'members',
+      component: () => import('@/views/members/Member.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar Família',
-          component: () => import('@/views/family/create-family/FamilyCreateView.vue'),
+          component: () => import('@/views/members/create-member/MemberCreateView.vue'),
         }, 
         {
           path: 'list',
           name: 'Listar Família',
-          component: () => import('@/views/family/list-family/FamilyListView.vue'),
+          component: () => import('@/views/members/list-member/MemberListView.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Família',
-          component: () => import('@/views/family/update-family/FamilyUpdateView.vue'),
+          component: () => import('@/views/members/update-member/MemberUpdateView.vue'),
         }
       ]
     },
-    // {
-    //   path: '/vehicles',
-    //   name: 'vehicles',
-    //   component: () => import('@/views/vehicles/Vehicle.vue'),
-    //   children: [
-    //     {
-    //       path: 'create',
-    //       name: 'Criar Veículo',
-    //       component: () => import('@/views/vehicles/create-vehicle/VehicleCreateView.vue'),
-    //     }, 
-    //     {
-    //       path: 'list',
-    //       name: 'Listar Veículo',
-    //       component: () => import('@/views/vehicles/list-vehicle/VehicleListView.vue'),
-    //     },
-    //     {
-    //       path: 'edit/:id',
-    //       name: 'Atualizar Veículo',
-    //       component: () => import('@/views/vehicles/update-vehicle/VehicleUpdateView.vue'),
-    //     }
-    //   ]
-    // },
+    {
+      path: '/trucks',
+      name: 'trucks',
+      component: () => import('@/views/trucks/Trucks.vue'),
+      children: [
+        {
+          path: 'create',
+          name: 'Criar Veículo',
+          component: () => import('@/views/trucks/create-trucks/TrucksCreateView.vue'),
+        }, 
+        {
+          path: 'list',
+          name: 'Listar Veículo',
+          component: () => import('@/views/trucks/list-trucks/TrucksListView.vue'),
+        },
+        {
+          path: 'edit/:id',
+          name: 'Atualizar Veículo',
+          component: () => import('@/views/trucks/update-trucks/TrucksUpdateView.vue'),
+        }
+      ]
+    },
   ],
 })
 

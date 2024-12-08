@@ -4,21 +4,19 @@ import AddressService from '@/services/AddressService';
 import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
 
 export default {
-    name: 'DriverCreateView',
+    name: 'MemberFamilyCreateView',
     data() {
         return {
             userForm: {
-                name: null,
-                address: null,
-                birthday: null,
-                cellphone: null,
-                cpf: null,
-                email: null,
-                cnh_number: null,
-                cnh_category: null,
-                cnh_date: null,
-                created_by: null,
-                updated_by: null,
+            name: null,
+            // address: null,
+            birthday: null,
+            cellphone: null,
+            cpf: null,
+            email: null,
+            head_id: null,
+            created_by: null,
+            updated_by: null,
             },
             addressForm: {
                 cep: null,
@@ -62,7 +60,7 @@ export default {
                 console.log(this.userForm);
                 await UserService.postUser(this.userForm);
                 this.$router.push({
-                    name: 'Listar Usuários'
+                    name: 'Listar Membros da Família'
                 })
             } catch (error) {
                 console.error('Erro:', error)
@@ -74,7 +72,7 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Motorista</p>
+        <p class="text-5xl mt-5 mb-5">Criação de Membro da Família</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
@@ -103,21 +101,14 @@ export default {
                     <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
                 </div>
             </div>
-            <div class="flex">
+            <div>
                 <div class="flex-1 p-2">
-                    <label for="cnh_number">Nº CNH</label>
-                    <input type="text" v-model="userForm.cnh_number">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="cnh_category">Categoria CNH</label>
-                    <input type="text" v-model="userForm.cnh_category">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="cnh_date">Data Vencimento CNH</label>
-                    <input type="date" v-model="userForm.cnh_date">
+                     <label for="head_id">Responsável</label> <!-- Referência ao headFamily -->
+                    <input type="text" v-model="userForm.head_id">
                 </div>
             </div>
             <div class="flex">
+                
                 <div class="flex-1 p-2">
                     <label for="created_by">Criado por</label>
                     <input type="text" v-model="userForm.created_by">
@@ -126,16 +117,15 @@ export default {
                     <label for="updated_by">Atualizado em</label>
                     <input type="text" v-model="userForm.updated_by">
                 </div>
-                <!-- A opção de Ativo ou Inativo existirá aqui? -->
-                <!-- <div class="flex-1 p-2">
+                <div class="flex-1 p-2">
                     <label for="active">Ativo</label>
                     <input type="checkbox" v-model="userForm.active">
-                </div> -->
+                </div>
             </div>
             <br>
             <!-- <AddressCreateComponent /> -->
             <hr>
-            <!--Div endereço Inicio-->
+            <!--Div enderço Inicio-->
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cep">CEP</label>
@@ -180,7 +170,7 @@ export default {
             </div>
             <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
-                <button @click="submitNewUser"
+                <button @click="submitNewMember"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
                     type="submit">Enviar</button>
             </div>
