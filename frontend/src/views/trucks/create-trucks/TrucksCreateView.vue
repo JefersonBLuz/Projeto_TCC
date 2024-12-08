@@ -8,25 +8,12 @@ export default {
     data() {
         return {
             userForm: {
-                name: null,
-                active: null,
-                address: 1,
-                cellphone: null,
-                birthday: null,
-                cpf: null,
-                email: null,
-                password: null,
-                privileges: null,
-            },
-            addressForm: {
-                cep: null,
-                number: null,
-                street: null,
-                neighborhood: null,
-                city: null,
-                state: null,
-                latitude: null,
-                longitude: null
+                plate: null,
+                model: null,
+                year: null,
+                owner: null,
+                created_by: null,
+                updated_by: null,
             },
             isSubmitted: false,
         };
@@ -41,26 +28,12 @@ export default {
             this.isSubmitted = true
             console.log('Submit successfull')
         },
-        async submitNewAddress() {
-            try {
-                console.log(this.addressForm);
-                const res = await AddressService.postAddress(this.addressForm)
-                console.log(res.body.address.rows[0].id)
-                return res.body.address.rows[0].id
-            } catch (error) {
-
-            }
-        },
         async submitNewUser() {
             try {
-                const response = await this.submitNewAddress()
-                console.log(response);
-                
-                this.userForm.address = response
                 console.log(this.userForm);
                 await UserService.postUser(this.userForm);
                 this.$router.push({
-                    name: 'Listar Usuários'
+                    name: 'Listar Caminhões'
                 })
             } catch (error) {
                 console.error('Erro:', error)
@@ -72,102 +45,40 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Usuário</p>
+        <p class="text-5xl mt-5 mb-5">Cadastrar Caminhão</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="nameuser">Nome Completo</label>
-                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
-                        name="nameuser" placeholder="Nome completo">
+                    <label for="plate">Placa</label>
+                    <input type="text" v-model="userForm.plate" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
+                        name="plate" placeholder="Placa">
                 </div>
                 <div class="flex-1 p-2">
-                    <label for="birthday">Nascimento</label>
-                    <input type="text" v-model="userForm.birthday" id="birthday" name="birthday"
-                        placeholder="YYYY-MM-DD">
+                    <label for="birthday">Modelo</label>
+                    <input type="text" v-model="userForm.model" id="model" name="model"
+                        placeholder="Modelo">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="year">Ano</label>
+                    <input type="text" v-model="userForm.year" id="yeah" name="yeah"
+                        placeholder="YYYY">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="cellphone">Telefone</label>
-                    <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone"
-                        placeholder="5577912341234">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="cpf">CPF</label>
-                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
+                    <label for="cpf">Proprietário</label>
+                    <input type="text" v-model="userForm.owner" id="cpf" name="owner" placeholder="Proprietário">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="email">Email</label>
-                    <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
+                    <label for="cretead_by">Criado por</label>
+                    <input type="text" v-model="userForm.created_by" id="cretead_by" name="cretead_by" placeholder="Criado Por">
                 </div>
                 <div class="flex-1 p-2">
-                    <label for="password">Senha</label>
-                    <input type="password" v-model="userForm.password">
+                    <label for="password">Alterado em</label>
+                    <input type="password" v-model="userForm.updated_by" id="updated_by" name="updated_by" placeholder="Alterado Por">
                 </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="privileges">Privilegios</label>
-                    <input type="text" v-model="userForm.privileges">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="active">Ativo</label>
-                    <input type="checkbox" v-model="userForm.active">
-                </div>
-            </div>
-            <br>
-            <!-- <AddressCreateComponent /> -->
-            <hr>
-            <!--Div enderço Inicio-->
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="cep">CEP</label>
-                    <input type="text" v-model="addressForm.cep" id="cep" name="cep" placeholder="45000000">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="number">Número</label>
-                    <input type="text" v-model="addressForm.number" id="number" name="number" placeholder="000">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="street">Rua</label>
-                    <input type="text" v-model="addressForm.street" id="street" name="street"
-                        placeholder="Av. Rua">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="neighborhood">Bairro</label>
-                    <input type="text" v-model="addressForm.neighborhood" id="neighborhood" name="neighborhood"
-                        placeholder="Bairro">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="city">Cidade</label>
-                    <input type="text" v-model="addressForm.city" id="city" name="city" placeholder="Vitória da Conquista-BA">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="state">Estado</label>
-                    <input type="state" v-model="addressForm.state">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="latitude">Latitude</label>
-                    <input type="text" v-model="addressForm.latitude">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="longitude">Longitude</label>
-                    <input type="text" v-model="addressForm.longitude">
-                </div>
-            </div>
-            <!--Fim endereço-->
-            <div class="flex content-center items-center justify-center">
-                <button @click="submitNewUser"
-                    class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
-                    type="submit">Enviar</button>
             </div>
         </form>
     </div>

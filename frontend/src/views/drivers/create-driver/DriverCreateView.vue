@@ -9,7 +9,7 @@ export default {
         return {
             userForm: {
                 name: null,
-                address: null,
+                address: 1,
                 birthday: null,
                 cellphone: null,
                 cpf: null,
@@ -74,7 +74,7 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Motorista</p>
+        <p class="text-5xl mt-5 mb-5">Cadastro de Motorista</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">

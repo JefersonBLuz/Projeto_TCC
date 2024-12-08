@@ -9,7 +9,7 @@ export default {
         return {
             userForm: {
             name: null,
-            // address: null,
+            address: 1,
             birthday: null,
             cellphone: null,
             cpf: null,
@@ -72,7 +72,7 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Membro da Família</p>
+        <p class="text-5xl mt-5 mb-5">Cadastrar Membro da Família</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
@@ -117,10 +117,10 @@ export default {
                     <label for="updated_by">Atualizado em</label>
                     <input type="text" v-model="userForm.updated_by">
                 </div>
-                <div class="flex-1 p-2">
+                <!-- <div class="flex-1 p-2">
                     <label for="active">Ativo</label>
                     <input type="checkbox" v-model="userForm.active">
-                </div>
+                </div> -->
             </div>
             <br>
             <!-- <AddressCreateComponent /> -->
@@ -170,7 +170,7 @@ export default {
             </div>
             <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
-                <button @click="submitNewMember"
+                <button @click="submitNewUser"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
                     type="submit">Enviar</button>
             </div>

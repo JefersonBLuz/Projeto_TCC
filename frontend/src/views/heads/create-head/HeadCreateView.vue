@@ -9,12 +9,11 @@ export default {
         return {
             userForm: {
             name: null,
-            // address: null,
+            address: 1,
             birthday: null,
             cellphone: null,
             cpf: null,
             email: null,
-            head_id: null,
             created_by: null,
             updated_by: null,
             },
@@ -101,12 +100,6 @@ export default {
                     <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
                 </div>
             </div>
-            <div>
-                <div class="flex-1 p-2">
-                     <label for="head_id">Responsável</label> <!-- Referência ao headFamily -->
-                    <input type="text" v-model="userForm.head_id">
-                </div>
-            </div>
             <div class="flex">
                 
                 <div class="flex-1 p-2">
@@ -116,10 +109,6 @@ export default {
                 <div class="flex-1 p-2">
                     <label for="updated_by">Atualizado em</label>
                     <input type="text" v-model="userForm.updated_by">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="active">Ativo</label>
-                    <input type="checkbox" v-model="userForm.active">
                 </div>
             </div>
             <br>
@@ -170,7 +159,7 @@ export default {
             </div>
             <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
-                <button @click="submitNewMember"
+                <button @click="submitNewUser"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
                     type="submit">Enviar</button>
             </div>
