@@ -9,9 +9,8 @@ export default {
 </script>
 
 <template>
-  <main class="h-full content-center">
-    <div class="flex flex-1 w-11/12 mt-10 lg:flex-row flex-col lg:w-4/6 self-center justify-self-center px-6 py-12 lg:px-8 bg-zinc-800 rounded-3xl text-white dark:bg-gray-100 dark:text-blue-800 items-center">
-      <header>
+  <main class="h-full content-center lg:w-4/6 mx-auto">
+    <div class="flex flex-1 mx-auto mt-10 lg:flex-row flex-col lg:w-4/6 px-6 py-12 lg:px-8 bg-zinc-800 rounded-3xl text-white dark:bg-gray-100 dark:text-blue-800 items-center">
         <div class="sm:mx-auto sm:w-full sm:max-w-sm text-center">
           <img class="mx-auto" src="@/assets/aquasys_logo1.png" alt="Your Company" width="255" height="255" />
           <h1 class="text-5xl lg:px-12">Aquasys</h1>
@@ -19,7 +18,6 @@ export default {
             Sistema de controle<br>de abastecimento de água.
           </h3>
         </div>
-      </header>
       <div class="mt-10 mx-auto w-full max-w-sm">
         <form class="space-y-6" action="#" method="POST">
           <div> <!--Usuário-->
@@ -64,20 +62,8 @@ export default {
 
 @media (min-width: 1024px) {
 
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
   .logo {
     margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
   }
 
   nav {

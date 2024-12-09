@@ -1,13 +1,78 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aquasys</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aquasys</title>
+  <link href="https://refreshless.com/nouislider/dist/nouislider.css?v=1581" rel="stylesheet">
+  <script src="https://refreshless.com/nouislider/dist/nouislider.js?v=1581"></script>
+
+
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+  <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+</head>
+
+<body>
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+  <script>
+    function timestamp(str) {
+      return new Date(str).getTime();
+    }
+
+
+    // portuguese day format
+    function nth(d) {
+      if (d > 0 && d < 2) return 'º de';
+      if (d > 1) return ' de';
+    }
+
+    function formatDate(date) {
+      return date.toISOString().slice(0, 10)
+    }
+
+    var date = new Date();
+
+    // set previous month
+    var previousMonth = new Date();
+    previousMonth.setMonth(previousMonth.getMonth() - 1);
+
+    var dateSlider = document.getElementById('slider');
+
+    function toFormat(v) {
+      return formatDate(new Date(v));
+    }
+
+    // nouislider settings
+    noUiSlider.create(dateSlider, {
+      behaviour: 'tap',
+      connect: true,
+      tooltips: [true, true],
+      format: { to: toFormat, from: Number },
+      range: {
+        min: timestamp(date) - 5 * 360 * 24 * 60 * 60 * 1000,
+        max: timestamp(date)
+      },
+      step: 1 * 24 * 60 * 60 * 1000,
+      start: [timestamp(previousMonth), timestamp(date)]
+    });
+
+    // get range infos at html          
+    var dateValues = [
+      document.getElementById('event-start'), document.getElementById('event-end')
+    ];
+
+    dateSlider.noUiSlider.on('update', function (values, handle) {
+      dateValues[handle].innerHTML = values[handle];
+    });
+  </script>
+</body>
+
 </html>

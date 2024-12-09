@@ -1,5 +1,12 @@
 <script setup>
 import TheNavBar from '@/components/TheNavBar.vue';
+import Highcharts from 'highcharts-vue'
+import { ref, onMounted } from 'vue';
+
+const chartAbastecidosData = ref([]);
+const chartPercentualData = ref([]);
+const chartInformacaoData = ref([]);
+
 Highcharts.chart('chart-abastecidos', {
     chart: {
         type: 'bar',

@@ -91,7 +91,7 @@ a,
     display: flex;
     /* place-items: center; */
     height: 100vh;
-    /* min-width: 1024px; */
+    min-width: 1024px;
   }
 
   #app {

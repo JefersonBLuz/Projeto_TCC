@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import TheNavBar from '@/components/TheNavBar.vue';
+
 </script>
 <template>
     <TheNavBar />
