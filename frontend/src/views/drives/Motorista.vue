@@ -10,11 +10,6 @@ export default {
 }
 </script>
 <template>
-
-    <head>
-        <router-link to="/">Home</router-link>
-        <router-link to="/users">Usuário</router-link>
-    </head>
-    <h1>Página dos Motorista</h1>
+    <h1 class="text-xl5">Página dos Motorista</h1>
 </template>
 <style></style>

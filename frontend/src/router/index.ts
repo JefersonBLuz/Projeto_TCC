@@ -10,7 +10,7 @@ const router = createRouter({
     },
     {
       path: '/users',
-      name: 'users',
+      name: 'Usuários',
       component: () => import('@/views/users/Users.vue'),
       children: [
         {
@@ -33,7 +33,7 @@ const router = createRouter({
     {
       path: '/drivers',
       name: 'meunmotoristas',
-      component: () => import('@/views/Motorista.vue'),
+      component: () => import('@/views/drives/Motorista.vue'),
     },
   ],
 })

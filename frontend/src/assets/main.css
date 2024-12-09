@@ -1,10 +1,12 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  /* max-width: 1280px; */
+  margin: 0px;
+  /* padding: 2rem; */
   font-weight: normal;
+  width: 100vw;
+  height: 100vh;
 }
 .bg-color-primary{
   background-color: var(--color-primary);
@@ -43,9 +45,10 @@
   color: var(--color-text-alert-block);
 }
 
-input {
+.inputForms{
   width: 100%;
-  min-height: 30px;
+  height: 35px;
+  font-size: 13px;
   border-radius: 5px;
   border: 0.3px solid grey;
   padding: 5px 10px;
@@ -53,9 +56,10 @@ input {
   background: var(--color-background);
 }
 
-input:focus {
+.inputForms:focus {
   border: 0.3px solid grey;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 button {
@@ -84,17 +88,13 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
-    
-  }
-
-  input {
-    min-width: 300px;
+    /* place-items: center; */
+    height: 100vh;
+    /* min-width: 1024px; */
   }
 
   #app {
     display: flex;
     flex-direction: column;
-    
   }
 }
