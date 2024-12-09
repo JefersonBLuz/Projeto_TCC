@@ -1,7 +1,7 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import MemberService from '@/services/MembersService';
 export default {
-    name: 'UserListView',
+    name: 'MemberListView',
     data() {
         return {
             users: []
