@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import('@/views/SingIn.vue'),
     },
     {
+      path: '/home',
+      name: 'Home',
+      component: () => import('@/views/Home.vue'),
+    },
+    {
       path: '/users',
       name: 'Usuários',
       component: () => import('@/views/users/Users.vue'),
