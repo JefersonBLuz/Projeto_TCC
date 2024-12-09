@@ -62,7 +62,7 @@ export default {
                 console.log(this.userForm);
                 await UserService.postUser(this.userForm);
                 this.$router.push({
-                    name: 'Listar Usuários'
+                    name: 'Listar Motoristas'
                 })
             } catch (error) {
                 console.error('Erro:', error)
