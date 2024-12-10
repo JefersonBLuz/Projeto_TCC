@@ -17,61 +17,14 @@
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
   <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
 </head>
 
 <body>
   <div id="app"></div>
   <script type="module" src="/src/main.ts"></script>
   <script>
-    function timestamp(str) {
-      return new Date(str).getTime();
-    }
-
-
-    // portuguese day format
-    function nth(d) {
-      if (d > 0 && d < 2) return 'º de';
-      if (d > 1) return ' de';
-    }
-
-    function formatDate(date) {
-      return date.toISOString().slice(0, 10)
-    }
-
-    var date = new Date();
-
-    // set previous month
-    var previousMonth = new Date();
-    previousMonth.setMonth(previousMonth.getMonth() - 1);
-
-    var dateSlider = document.getElementById('slider');
-
-    function toFormat(v) {
-      return formatDate(new Date(v));
-    }
-
-    // nouislider settings
-    noUiSlider.create(dateSlider, {
-      behaviour: 'tap',
-      connect: true,
-      tooltips: [true, true],
-      format: { to: toFormat, from: Number },
-      range: {
-        min: timestamp(date) - 5 * 360 * 24 * 60 * 60 * 1000,
-        max: timestamp(date)
-      },
-      step: 1 * 24 * 60 * 60 * 1000,
-      start: [timestamp(previousMonth), timestamp(date)]
-    });
-
-    // get range infos at html          
-    var dateValues = [
-      document.getElementById('event-start'), document.getElementById('event-end')
-    ];
-
-    dateSlider.noUiSlider.on('update', function (values, handle) {
-      dateValues[handle].innerHTML = values[handle];
-    });
+    import { Icon } from "@iconify/vue";
   </script>
 </body>
 

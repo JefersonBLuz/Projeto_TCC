@@ -43,25 +43,26 @@ export default {
         },
         async submitNewAddress() {
             try {
-                console.log(this.addressForm);
                 const res = await AddressService.postAddress(this.addressForm)
-                console.log(res.body.address.rows[0].id)
+                this.$router.push({
+                    name: 'Listar Usuários'
+                })
                 return res.body.address.rows[0].id
             } catch (error) {
-
+                this.$router.push({
+                    name: 'Criar usuário'
+                })
+                return alert('erro')
             }
         },
         async submitNewUser() {
             try {
                 const response = await this.submitNewAddress()
-                console.log(response);
-                
                 this.userForm.address = response
-                console.log(this.userForm);
                 await UserService.postUser(this.userForm);
-                this.$router.push({
-                    name: 'Listar Usuários'
-                })
+                // this.$router.push({
+                //     name: 'Listar Usuários'
+                // })
             } catch (error) {
                 console.error('Erro:', error)
                 return error
@@ -113,10 +114,6 @@ export default {
                 <div class="flex-1 p-2">
                     <label for="privileges">Privilegios</label>
                     <input class="inputForms" type="text" v-model="userForm.privileges">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="active">Ativo</label>
-                    <input type="checkbox" v-model="userForm.active">
                 </div>
             </div>
             <br>

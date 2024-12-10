@@ -1,19 +1,21 @@
 <script lang="ts" setup>
+import { onMounted } from 'vue';
 import TheNavBar from '@/components/TheNavBar.vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
+onMounted(() => {
+    console.log('Redirect');
+    
+    router.push({ name: 'Listar Usuários' });
+});
 </script>
 <template>
     <TheNavBar />
-    <!-- <nav> -->
-    <div>
-        <router-link to="/users/create">Adicionar</router-link>
-        <router-link to="/users/list">Listar</router-link>
-        <router-link to="/users/update">Editar</router-link>
-    </div>
-    <!-- </nav> -->
-    <router-view />
+    <!-- <router-link to="/users/create">Criar</router-link> -->
+    <main class="lg:mx-20 w-10/12 mx-2 self-center">
+        <router-view />
+    </main>
 </template>
 
-<style>
-
-</style>
+<style></style>

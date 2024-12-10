@@ -45,24 +45,20 @@ export default {
     <hr class="mb-5">
     <form v-on:submit.prevent="updateUser()" method="post">
         <label for="nameuser">Nome Completo</label>
-        <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
+        <input class="inputForms" type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
             name="nameuser" placeholder="Nome completo">
         <label for="birthday">Nascimento</label>
-        <input type="text" v-model="userForm.birthday" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
+        <input class="inputForms" type="text" v-model="userForm.birthday" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
         <label for="cellphone">Telefone</label>
-        <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone" placeholder="5577912341234">
+        <input class="inputForms" type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone" placeholder="5577912341234">
         <label for="cpf">CPF</label>
-        <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
+        <input class="inputForms" type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
         <label for="email">Email</label>
-        <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
+        <input class="inputForms" type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
         <label for="password">Senha</label>
-        <input type="password" v-model="userForm.password">
+        <input class="inputForms" type="password" v-model="userForm.password">
         <label for="privileges">Privilegios</label>
-        <input type="text" v-model="userForm.privileges">
-        <p>
-            <label for="active">Ativo</label>
-            <input class="size-4" type="checkbox" v-model="userForm.active">
-        </p>
+        <input class="inputForms" type="text" v-model="userForm.privileges">
         <br>
         <div class="flex">
             <button class="blue bg-gray-700 justify-self-center" type="submit">Enviar</button>

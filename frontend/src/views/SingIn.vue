@@ -1,9 +1,25 @@
 <script lang="ts">
-import { checkEmail, checkPassword } from '@/utils/LoginFunctions';
-const loginUser: boolean = checkEmail('email') && checkPassword('email')
 export default {
   name: 'SingIn',
-  method: {
+  data(){
+    return {
+      login: {
+        username: null,
+        password:null,
+      },
+      passwordCorrect: false,
+    };
+  },
+  methods: {
+    loginUser(){
+      if(this.login.username === 'admin' && this.login.password === 'admin'){
+        return this.$router.push({name: 'Usuários'})
+      }
+      if(this.login.username === null && this.login.password === null){
+        return false
+      }
+      this.passwordCorrect = true;
+    }
   },
 };
 </script>
@@ -19,12 +35,13 @@ export default {
           </h3>
         </div>
       <div class="mt-10 mx-auto w-full max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form class="space-y-6" v-on:submit.prevent="loginUser()" method="POST">
           <div> <!--Usuário-->
             <label for="email" class="block text-sm font-medium">Usuário</label>
             <div class="mt-2">
-              <input id="email" name="email" type="email" autocomplete="email" required
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 px-2 " />
+              <input id="email" name="email" type="text" autocomplete="email" required
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 px-2"
+                v-model="login.username" tabindex="1"/>
             </div>
           </div>
           <!--Senha-->
@@ -32,17 +49,20 @@ export default {
             <div class="flex items-center justify-between">
               <label for="password" class="block text-sm/6 font-medium">Senha</label>
               <div class="text-sm">
-                <a href="#"
+                <!--Esqueceu a senha-->
+                <a href="#" tabindex="0"
                   class="font-semibold text-sky-400 hover:text-sky-300 dark:text-sky-700 dark:hover:text-sky-600">Esqueceu
                   a senha?</a>
+                  <!--Fim Esqueceu a senha-->
               </div>
             </div>
             <div class="mt-2">
               <input id="password" name="password" type="password" autocomplete="current-password" required
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 px-2" />
+                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6 px-2" 
+                v-model="login.password" tabindex="1">
             </div>
             <div>
-              <p v-if="loginUser" class="text-center font-medium py-2 text-alert">Usuário/Senha incorretos!</p>
+              <p v-if="passwordCorrect" class="text-center font-medium py-2 text-alert">Usuário/Senha incorretos!</p>
             </div>
           </div>
           <div> <!--Botão de enviar-->

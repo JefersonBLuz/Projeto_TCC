@@ -1,49 +1,30 @@
-<script lang="ts">
-import UserService from '@/services/UsersService';
-export default {
-    name: 'UserListView',
-    data() {
-        return {
-            users: []
-        };
-    },
-    mounted() {
-        this.listAllUsers()
-    },
-    methods: {
-        async listAllUsers() {
-            try {
-                const response = await UserService.getUsresAddressAll()
-                console.log(response);
-                
-                this.users = response;
-            } catch (error) {
-                console.error('Error: ', error);
-            }
-        },
-        async removerUser(id: number){
-            const response = await UserService.deleteUser(id)
-            console.log('delete');
-            this.listAllUsers()
-        }
-    }
-}
-</script>
+<script src="./UserListView.ts"></script>
 <template>
-    <h1 class="text-5xl mb-4 text-center"> Página de listar Usuários</h1>
+
+    <header class="flex my-4">
+        <h1 class="text-5xl flex-4/5">Usuários</h1>
+        <router-link to="/users/create" class="flex-1/5">Criar</router-link>
+    </header>
     <hr class="mb-7">
     <main class="flex flex-col">
         <!--Divisão para cada usuários-->
-        <div class="m-1 p-0" v-for="user in users" :key="user.users.id">
+        <div class="m-1 p-2 rounded-lg border-2 dark:border-slate-400 dark:bg-gray-600" v-for="user in users" :key="user.users.id">
             <!--Introdução-->
             <header class="flex flex-row min-w-min">
-                <div class="flex-1">
-                    Nome: {{ user.users.name }}
+                <div class="flex-1 text-4xl">{{ user.users.name }}
+                </div>
+                <div class="flex-1 self-end">
+                    <router-link :to="{ name: 'Atualizar Usuário', params: { id: user.users.id } }" class=" bg-blue-600">
+                        <Icon icon="line-md:edit-full-twotone" width="48" height="48" />
+                    </router-link>
                 </div>
                 <div class="flex-1">
-                    CPF: {{ user.users.cpf }}
+                    <button class="bg-red-600" @click="removerUser(user.users.id)">
+                        Delete
+                    </button>
                 </div>
             </header>
+            <hr>
             <!--Contatos-->
             <section class="flex flex-row min-w-min">
                 <div class="flex-1">Email: {{ user.users.email }}</div>
@@ -53,8 +34,7 @@ export default {
             <footer class="flex flex-row min-w-min">
                 <div class="flex-1">Função: {{ user.users.privileges }}</div>
                 <div class="flex-1">
-                    <router-link :to="{name: 'Atualizar Usuário', params: {id: user.users.id}}"
-                    class=" bg-blue-600">
+                    <router-link :to="{ name: 'Atualizar Usuário', params: { id: user.users.id } }" class=" bg-blue-600">
                         Editar
                     </router-link>
                 </div>
@@ -64,7 +44,6 @@ export default {
                     </button>
                 </div>
             </footer>
-            <hr>
         </div>
     </main>
 </template>
