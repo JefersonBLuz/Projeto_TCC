@@ -5,27 +5,10 @@ export default {
     data() {
         return {
             userForm: {
-                // name: null,
-                // active: null,
-                // address: 1,
-                // cellphone: null,
-                // birthday: null,
-                // cpf: null,
-                // email: null,
-                // password: null,
-                // privileges: null,
             },
             addressForm:{
-                // cep: null,
-                // number: null,
-                // street: null,
-                // neighborhood: null,
-                // city: null,
-                // state: null,
-                // latitude: null,
-                // longitude: null
-            },
-            isSubmitted: false,
+
+            }
         };
     },
     mounted() {

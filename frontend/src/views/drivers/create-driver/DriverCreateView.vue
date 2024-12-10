@@ -4,19 +4,21 @@ import AddressService from '@/services/AddressService';
 import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
 
 export default {
-    name: 'UserCreateView',
+    name: 'DriverCreateView',
     data() {
         return {
             userForm: {
                 name: null,
-                active: null,
                 address: 1,
-                cellphone: null,
                 birthday: null,
+                cellphone: null,
                 cpf: null,
                 email: null,
-                password: null,
-                privileges: null,
+                cnh_number: null,
+                cnh_category: null,
+                cnh_date: null,
+                created_by: null,
+                updated_by: null,
             },
             addressForm: {
                 cep: null,
@@ -60,7 +62,7 @@ export default {
                 console.log(this.userForm);
                 await UserService.postUser(this.userForm);
                 this.$router.push({
-                    name: 'Listar Usuários'
+                    name: 'Listar Motoristas'
                 })
             } catch (error) {
                 console.error('Erro:', error)
@@ -72,13 +74,17 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Cadastro de Usuário</p>
+        <p class="text-5xl mt-5 mb-5">Cadastro de Motorista</p>
         <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="nameuser">Nome Completo</label>
-                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
-                        name="nameuser" placeholder="Nome completo">
+                    <label for="namedriver">Nome Completo</label>
+                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="namedriver"
+                        name="namedriver" placeholder="Nome completo">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="cpf">CPF</label>
+                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="birthday">Nascimento</label>
@@ -93,34 +99,43 @@ export default {
                         placeholder="5577912341234">
                 </div>
                 <div class="flex-1 p-2">
-                    <label for="cpf">CPF</label>
-                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
                     <label for="email">Email</label>
                     <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
                 </div>
+            </div>
+            <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="password">Senha</label>
-                    <input type="password" v-model="userForm.password">
+                    <label for="cnh_number">Nº CNH</label>
+                    <input type="text" v-model="userForm.cnh_number">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="cnh_category">Categoria CNH</label>
+                    <input type="text" v-model="userForm.cnh_category">
+                </div>
+                <div class="flex-1 p-2">
+                    <label for="cnh_date">Data Vencimento CNH</label>
+                    <input type="date" v-model="userForm.cnh_date">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="privileges">Privilegios</label>
-                    <input type="text" v-model="userForm.privileges">
+                    <label for="created_by">Criado por</label>
+                    <input type="text" v-model="userForm.created_by">
                 </div>
                 <div class="flex-1 p-2">
+                    <label for="updated_by">Atualizado em</label>
+                    <input type="text" v-model="userForm.updated_by">
+                </div>
+                <!-- A opção de Ativo ou Inativo existirá aqui? -->
+                <!-- <div class="flex-1 p-2">
                     <label for="active">Ativo</label>
                     <input type="checkbox" v-model="userForm.active">
-                </div>
+                </div> -->
             </div>
             <br>
             <!-- <AddressCreateComponent /> -->
             <hr>
-            <!--Div enderço Inicio-->
+            <!--Div endereço Inicio-->
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cep">CEP</label>

@@ -1,19 +1,20 @@
-<script lang="ts" setup>
-import TheNavBar from '@/components/TheNavBar.vue';
+<script lang="ts">
+export default {
+    name: 'UsersView',
+    data() {
+        return {
 
+        };
+    },
+};
 </script>
 <template>
-    <TheNavBar />
-    <!-- <nav> -->
-    <div>
+    <nav>
         <router-link to="/users/create">Adicionar</router-link>
         <router-link to="/users/list">Listar</router-link>
         <router-link to="/users/update">Editar</router-link>
-    </div>
-    <!-- </nav> -->
+    </nav>
+    <br>
+    <hr>
     <router-view />
 </template>
-
-<style>
-
-</style>

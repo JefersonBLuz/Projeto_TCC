@@ -1,41 +1,24 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import MemberService from '@/services/MembersService';
 export default {
-    name: 'UserUpdateView',
+    name: 'MemberUpdateView',
     data() {
         return {
             userForm: {
-                // name: null,
-                // active: null,
-                // address: 1,
-                // cellphone: null,
-                // birthday: null,
-                // cpf: null,
-                // email: null,
-                // password: null,
-                // privileges: null,
             },
             addressForm:{
-                // cep: null,
-                // number: null,
-                // street: null,
-                // neighborhood: null,
-                // city: null,
-                // state: null,
-                // latitude: null,
-                // longitude: null
-            },
-            isSubmitted: false,
+
+            }
         };
     },
     mounted() {
-        this.getUsresAddressId()
+        this.getMemberAddressId()
     },
 
     methods: {
-        async getUsresAddressId() {
+        async getMemberAddressId() {
             const { id } = this.$route.params;
-            const response = await UserService.getUsresAddressId(id)
+            const response = await MemberService.getMemberAddressId(id)
             console.log(response[0].users);
             console.log(response[0].address);
             this.userForm = { ...response[0].users }
@@ -44,10 +27,10 @@ export default {
         async updateUser() {
             try {
                 console.log(this.userForm);
-                await UserService.updateUser(this.userForm)
-                console.log('Usuário Atualizado');
+                await MemberService.updateMember(this.userForm)
+                console.log('Membro da família Atualizado');
                 this.$router.push({
-                    name: 'Listar Usuários'
+                    name: 'Listar Membro da Família'
                 })
             } catch (error) {
                 console.error(error);
@@ -58,7 +41,7 @@ export default {
 };
 </script>
 <template>
-    <h1 class="text-5xl pb-2">Editar Usuário</h1>
+    <!-- <h1 class="text-5xl pb-2">Editar Membro Familiar</h1>
     <hr class="mb-5">
     <form v-on:submit.prevent="updateUser()" method="post">
         <label for="nameuser">Nome Completo</label>
@@ -84,5 +67,5 @@ export default {
         <div class="flex">
             <button class="blue bg-gray-700 justify-self-center" type="submit">Enviar</button>
         </div>
-    </form>
+    </form> -->
 </template>
