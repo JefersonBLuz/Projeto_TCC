@@ -1,5 +1,4 @@
 import UserService from '@/services/UsersService';
-import { Icon } from "@iconify/vue";
 export default {
     name: 'UserListView',
     data() {
@@ -23,7 +22,7 @@ export default {
         },
         async removerUser(id: number){
             try {
-                const response = await UserService.deleteUser(id)
+                await UserService.deleteUser(id)
                 console.log('delete');
                 this.listAllUsers()
             } catch (error) {

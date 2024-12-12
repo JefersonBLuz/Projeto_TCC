@@ -13,7 +13,7 @@ onMounted(() => {
 <template>
     <TheNavBar />
     <!-- <router-link to="/users/create">Criar</router-link> -->
-    <main class="lg:mx-20 w-10/12 mx-2 self-center">
+    <main class="lg:px-20 w-10/12 mx-2 self-center">
         <router-view />
     </main>
 </template>
