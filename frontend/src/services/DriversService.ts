@@ -10,9 +10,9 @@
  * Método responsável por listar todos os 'Usuários' sem 'Address'.
  * (GET): localhost:3000/users/view
  */
-const getUsers = async () => {
+const getDriver = async () => {
     try {
-        const response = await fetch('http://localhost:8082/users/view', {
+        const response = await fetch('http://localhost:8082/drivers/list-Driver', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,9 +32,9 @@ const getUsers = async () => {
  * Método responsável por listar 'Usuário' por 'name' sem 'Address'.
  * (GET): localhost:3000/users/view/:name
  */
-const getUserName = async (name: string) => {
+const getDriverName = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/users/view/${name}`, {
+        const response = await fetch(`http://localhost:8082/drivers/list-Driver/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,14 +51,14 @@ const getUserName = async (name: string) => {
  * Método responsável por criar um novo(a) 'Usuário'
  * (POST): localhost:3000/users/createUser
  */
-const postUser = async (user: any) => {
+const postDriver = async (driver: any) => {
     try {
-        const response = await fetch('http://localhost:8082/users/create-user', {
+        const response = await fetch('http://localhost:8082/drivers/create-Driver', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(driver)
         });
 
         const res = await response.json()
@@ -77,21 +77,21 @@ const postUser = async (user: any) => {
  * Método responsável por atualizar um determinado 'Usuário' por 'Id'.
  * (PUT): localhost:3000/users/update/:id
  */
-const updateUser = async (user: any) => {
+const updateDriver = async (driver: any) => {
     try {
-        const id: number = user.id;
-        const response = await fetch(`http://localhost:8082/users/update/${id}`, {
+        const id: number = driver.id;
+        const response = await fetch(`http://localhost:8082/drivers/update-Driver/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(user)
+            body: JSON.stringify(driver)
         })
         const res = await response.json()
         if (!response.ok) {
             return res;
         }
-        return response
+        return alert('Atualizado com sucesso')
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
     }
@@ -101,9 +101,9 @@ const updateUser = async (user: any) => {
  * Método responsável por excluir um determinado 'Usuário' por 'Id'.
  * (DELETE): localhost:3000/users/delete/:id
  */
-const deleteUser = async (id: number) => {
+const deleteDriver = async (id: number) => {
     try {
-        const response = await fetch(`http://localhost:8082/users/delete/${id}`, {
+        const response = await fetch(`http://localhost:8082/drivers/delete/${id}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
@@ -120,9 +120,9 @@ const deleteUser = async (id: number) => {
  * Método responsável por listar todos os 'Usuários' com 'Address'
  * (GET): localhost:3000/users/viewaddress
  */
-const getUsresAddressAll = async () => {
+const getDriverAddressAll = async () => {
     try {
-        const response = await fetch(`http://localhost:8082/users/viewaddress`, {
+        const response = await fetch(`http://localhost:8082/drivers/viewaddress`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
@@ -142,9 +142,9 @@ const getUsresAddressAll = async () => {
  * Método responsável por listar 'Usuário' por 'name' com 'Address'.
  * (GET): localhost:3000/users/viewaddress/:name
  */
-const getUsresAddress = async (name: string) => {
+const getDriverAddress = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/users/viewaddress/${name}`, {
+        const response = await fetch(`http://localhost:8082/drivers/viewaddress/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -161,9 +161,9 @@ const getUsresAddress = async (name: string) => {
  * Método responsável por listar 'Usuário' por 'name' com 'Address'.
  * (GET): localhost:3000/users/viewaddressid/:id
  */
-const getUsresAddressId = async (id: string) => {
+const getDriverAddressId = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/users/viewaddressid/${id}`, {
+        const response = await fetch(`http://localhost:8082/drivers/viewaddressid/${id}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -175,4 +175,4 @@ const getUsresAddressId = async (id: string) => {
         return console.error('Erro: ', error)
     }
 }
-export default { postUser, getUsers, getUserName, updateUser, deleteUser, getUsresAddressAll, getUsresAddress, getUsresAddressId }
+export default { postDriver, getDriver, getDriverName, updateDriver, deleteDriver, getDriverAddressAll, getDriverAddress, getDriverAddressId }
