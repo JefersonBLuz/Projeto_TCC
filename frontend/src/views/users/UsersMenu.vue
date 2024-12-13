@@ -5,8 +5,6 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 onMounted(() => {
-    console.log('Redirect');
-    
     router.push({ name: 'Listar Usuários' });
 });
 </script>
