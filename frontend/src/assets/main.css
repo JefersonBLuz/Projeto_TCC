@@ -56,7 +56,29 @@
   color: var(--color-text);
   background: var(--color-background);
 }
+[data-tooltip] {
+  position: relative;
+  font-weight: bold;
+}
 
+[data-tooltip]:after {
+  display: none;
+  position: absolute;
+  font-size: 12px;
+  top: 60%;
+  padding: 5px;
+  border-radius: 10px;
+  left: calc(100% + 1px );
+  content: attr(data-tooltip);
+  white-space: nowrap;
+  background-color:var(--color-background);
+  border: solid 0.5px var(--color-text);
+  color: var(--color-text);
+}
+
+[data-tooltip]:hover:after {
+  display: block;
+}
 .inputForms:focus {
   border: 0.3px solid grey;
   border-radius: 5px;
