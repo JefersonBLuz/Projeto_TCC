@@ -202,7 +202,7 @@ const VectorSource = ol.source.Vector,
     VectorLayer = ol.layer.Vector;
 let count = 0;
 
-let pontos = [
+const pontos = [
     [[-40.8294, -14.8576], 10],
     [[-40.9298, -14.9578], 20],
     [[-40.7298, -14.7578], 5],

@@ -59,9 +59,14 @@ export default {
         <input class="inputForms" type="password" v-model="userForm.password">
         <label for="privileges">Privilegios</label>
         <input class="inputForms" type="text" v-model="userForm.privileges">
+        <label for="Active">Ativo</label>
+        <input class="inputForms" type="text" v-model="userForm.active">
         <br>
-        <div class="flex">
-            <button class="blue bg-gray-700 justify-self-center" type="submit">Enviar</button>
+        <br>
+        <div class="flex self-center items-center justify-items-center px-14 h-10">
+            <router-link to="/users/list" class="bg-red-300 text-center basis-2/5 text-2xl rounded-lg text-red-950 h-10 hover:bg-red-950 hover:text-red-100">Cancelar</router-link>
+            <div class="basis-1/5"></div>
+            <button class="bg-sky-300 basis-2/5 text-2xl rounded-lg text-sky-950 h-full hover:bg-sky-800 hover:text-sky-100" type="submit">Enviar</button>
         </div>
     </form>
 </template>
