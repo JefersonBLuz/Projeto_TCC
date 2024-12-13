@@ -73,7 +73,7 @@
   white-space: nowrap;
   background-color:var(--color-background);
   border: solid 0.5px var(--color-text);
-  color: var(--color-text);
+  color: var(--background-dark-secundaria);
 }
 
 [data-tooltip]:hover:after {
