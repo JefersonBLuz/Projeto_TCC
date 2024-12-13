@@ -118,7 +118,7 @@ const updateUser = async (req: Request, res: Response) => {
     try {
         const rows = await db.update(users).set({
             name: name,
-            active: active? active: true,
+            active: active,
             address: address,
             birthday: birthday,
             cellphone: cellphone,
