@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -19,13 +19,17 @@
     "@vue/compiler-dom": "^3.5.13",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
+    "chart.js": "^4.4.7",
     "drizzle-orm": "^0.36.3",
+    "highcharts-vue": "^2.0.1",
     "pinia": "^2.2.6",
     "postgres": "^3.4.5",
     "vue": "^3.5.12",
     "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@headlessui/vue": "^1.7.23",
+    "@iconify/vue": "^4.2.0",
     "@tsconfig/node22": "^22.0.0",
     "@types/jsdom": "^21.1.7",
     "@types/node": "^22.9.0",

@@ -91,7 +91,7 @@ const updateUser = async (user: any) => {
         if (!response.ok) {
             return res;
         }
-        return alert('Atualizado com sucesso')
+        return response
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
     }

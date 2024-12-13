@@ -5,7 +5,7 @@
  * Autor: Jeferson Braga
  */
 import { Request, Response } from "express";
-import { db, eq } from "../config/db";
+import { db, eq, ilike } from "../config/db";
 import { address, users } from "../config/model/schema";
 import { console } from "inspector";
 
@@ -43,7 +43,7 @@ const createUser = async (req: Request, res: Response) => {
 // * Método responsavél listar todos usuários:
 const viewUsersAll = async (req: Request, res: Response) => {
     try {
-        const rows = await db.select().from(users);
+        const rows = await db.select().from(users).orderBy(users.name);
         res.status(200).send(rows);
     } catch (error) {
         console.error('viewUsersAll: ', error);
@@ -57,8 +57,9 @@ const viewUsersAll = async (req: Request, res: Response) => {
 const viewUser = async (req: Request, res: Response) => {
     const { name } = req.params;
     try {
-        const rows = await db.select().from(users).where(eq(users.name, name)
-        );
+        const value: string = "%"+name+"%"
+        const rows = await db.select().from(users).where(ilike(users.name, value)
+        ).orderBy(users.name);
         res.status(200).send(rows);
     } catch (error) {
         console.log('viewUser: ', error);
@@ -71,7 +72,7 @@ const viewUser = async (req: Request, res: Response) => {
 // * Método responsavél listar todos os usuário e seus endereços:
 const viewUsersAllWithAddress = async (req: Request, res: Response) => {
     try {
-        const rows = await db.select().from(users).innerJoin(address, eq(users.address, address.id));
+        const rows = await db.select().from(users).innerJoin(address, eq(users.address, address.id)).orderBy(users.name);
         res.status(200).send(rows);
     } catch (error) {
         console.log('viewUsersAllWithAddress: ', error);
@@ -85,7 +86,8 @@ const viewUsersAllWithAddress = async (req: Request, res: Response) => {
 const viewUsersWithAddress = async (req: Request, res: Response) => {
     const { name } = req.params
     try {
-        const rows = await db.select().from(users).where(eq(users.name, name)).innerJoin(address, eq(users.address, address.id));
+        const value: string = "%"+name+"%"
+        const rows = await db.select().from(users).where(ilike(users.name, value)).innerJoin(address, eq(users.address, address.id)).orderBy(users.name);
         res.status(200).send(rows);
     } catch (error) {
         console.error('viewUsersWithAddress: ', error);
@@ -116,7 +118,7 @@ const updateUser = async (req: Request, res: Response) => {
     try {
         const rows = await db.update(users).set({
             name: name,
-            active: active? active: true,
+            active: active,
             address: address,
             birthday: birthday,
             cellphone: cellphone,

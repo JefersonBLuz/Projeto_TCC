@@ -1,7 +1,7 @@
 <script lang="ts">
 import UserService from '@/services/UsersService';
 import AddressService from '@/services/AddressService';
-import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
+import getCord from '@/utils/cord'
 
 export default {
     name: 'UserCreateView',
@@ -29,8 +29,12 @@ export default {
                 longitude: null
             },
             isSubmitted: false,
+            isRouter: {},
         };
     },
+    // mounted() {
+    //     this.test()
+    // },
     validations: {
         userForm: {
             name: 'required'
@@ -41,27 +45,36 @@ export default {
             this.isSubmitted = true
             console.log('Submit successfull')
         },
-        async submitNewAddress() {
+        async test() {
             try {
-                console.log(this.addressForm);
-                const res = await AddressService.postAddress(this.addressForm)
-                console.log(res.body.address.rows[0].id)
-                return res.body.address.rows[0].id
+                const query: string = String(this.addressForm.cep)
+                const response = await getCord.getCord(query);
+                this.addressForm = { ...response }
+
             } catch (error) {
 
+            }
+        }
+        ,
+        async submitNewAddress() {
+            try {
+                const res = await AddressService.postAddress(this.addressForm);
+                this.isRouter = {name: 'Listar Usuários'};
+
+                return res.body.address.rows[0].id
+            } catch (error) {
+                this.isRouter = {name: 'Criar usuário'};
+                return alert('erro')
             }
         },
         async submitNewUser() {
             try {
                 const response = await this.submitNewAddress()
-                console.log(response);
-                
                 this.userForm.address = response
-                console.log(this.userForm);
                 await UserService.postUser(this.userForm);
-                this.$router.push({
-                    name: 'Listar Usuários'
-                })
+                this.$router.push(
+                    this.isRouter
+                )
             } catch (error) {
                 console.error('Erro:', error)
                 return error
@@ -71,104 +84,98 @@ export default {
 };
 </script>
 <template>
-    <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Cadastro de Usuário</p>
-        <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="nameuser">Nome Completo</label>
-                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
-                        name="nameuser" placeholder="Nome completo">
+    <div class="flex flex-col justify-self-center w-full self-center justify-items-center">
+        <p class="text-5xl mt-5 mb-5">Criação de Usuário</p>
+        <hr>
+        <main class="justify-center">
+            <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
+                <!--Informação pessoais-->
+                <div class="flex flex-col lg:flex-row">
+                    <div class="basis-2/4 p-2">
+                        <label for="nameuser" class="text-lg">Nome Completo</label>
+                        <input class="inputForms" type="text" v-model="userForm.name"
+                            :class="{ 'is-invalid': isSubmitted }" id="nameuser" name="nameuser"
+                            placeholder="Nome completo">
+                    </div>
+                    <div class="basis-1/4 p-2 text-lg">
+                        <label for="birthday" class="text-lg">Nascimento</label>
+                        <input class="inputForms" type="text" v-model="userForm.birthday" id="birthday" name="birthday"
+                            placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="flex-1 p-2">
+                        <label for="cpf" class="text-lg">CPF</label>
+                        <input class="inputForms" type="text" v-model="userForm.cpf" id="cpf" name="cpf"
+                            placeholder="12312312355">
+                    </div>
                 </div>
-                <div class="flex-1 p-2">
-                    <label for="birthday">Nascimento</label>
-                    <input type="text" v-model="userForm.birthday" id="birthday" name="birthday"
-                        placeholder="YYYY-MM-DD">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="flex-1 p-2">
+                        <label for="email" class="text-lg">Email</label>
+                        <input class="inputForms" type="text" v-model="userForm.email" id="email" name="email"
+                            placeholder="email@email.com">
+                    </div>
+                    <div class="flex-1 p-2">
+                        <label for="cellphone" class="text-lg">Telefone</label>
+                        <input class="inputForms" type="text" v-model="userForm.cellphone" id="cellphone"
+                            name="cellphone" placeholder="5577912341234">
+                    </div>
+                    <div class="flex-1 p-2">
+                        <label for="password" class="text-lg">Senha</label>
+                        <input class="inputForms" type="password" v-model="userForm.password">
+                    </div>
                 </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="cellphone">Telefone</label>
-                    <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone"
-                        placeholder="5577912341234">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="flex-1 p-2">
+                        <label for="privileges" class="text-lg">Privilegios</label>
+                        <input class="inputForms" type="text" v-model="userForm.privileges">
+                    </div>
                 </div>
-                <div class="flex-1 p-2">
-                    <label for="cpf">CPF</label>
-                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
+                <br>
+                <hr>
+                <!--Div enderço Inicio-->
+                <section class="flex flex-col">
+                    <div class="flex lg:flex-row flex-col">
+                        <div class="flex-1 p-2">
+                            <label for="cep" class="text-lg">CEP</label>
+                            <input @keyup="test" class="inputForms" type="text" v-model="addressForm.cep" id="cep"
+                                name="cep" placeholder="Digita o CEP">
+                        </div>
+                        <div class="flex-1 p-2">
+                            <label for="city" class="text-lg">Cidade</label>
+                            <input class="inputForms" type="text" v-model="addressForm.city" id="city" name="city"
+                                placeholder="">
+                        </div>
+                        <div class="p-2">
+                            <label for="state" class="text-lg">UF</label>
+                            <input class="inputForms" type="state" v-model="addressForm.state">
+                        </div>
+                    </div>
+                    <div class="flex lg:flex-row flex-col">
+                        <div class="flex-1 p-2">
+                            <label for="neighborhood" class="text-lg">Bairro</label>
+                            <input class="inputForms" type="text" v-model="addressForm.neighborhood" id="neighborhood"
+                                name="neighborhood" placeholder="">
+                        </div>
+                        <div class="flex-1 p-2">
+                            <label for="street" class="text-lg">Rua</label>
+                            <input class="inputForms" type="text" v-model="addressForm.street" id="street" name="street"
+                                placeholder="">
+                        </div>
+                        <div class="p-2">
+                            <label for="number" class="text-lg">Número</label>
+                            <input class="inputForms" type="text" v-model="addressForm.number" id="number" name="number"
+                                placeholder="">
+                        </div>
+                    </div>
+                </section>
+                <!--Fim endereço-->
+                <div class="flex content-center items-center justify-center py-5">
+                    <router-link to="/users/list"> Cancelar</router-link>
+                    <button @click="submitNewUser"
+                        class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
+                        type="submit">Enviar</button>
                 </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="email">Email</label>
-                    <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="password">Senha</label>
-                    <input type="password" v-model="userForm.password">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="privileges">Privilegios</label>
-                    <input type="text" v-model="userForm.privileges">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="active">Ativo</label>
-                    <input type="checkbox" v-model="userForm.active">
-                </div>
-            </div>
-            <br>
-            <!-- <AddressCreateComponent /> -->
-            <hr>
-            <!--Div enderço Inicio-->
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="cep">CEP</label>
-                    <input type="text" v-model="addressForm.cep" id="cep" name="cep" placeholder="45000000">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="number">Número</label>
-                    <input type="text" v-model="addressForm.number" id="number" name="number" placeholder="000">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="street">Rua</label>
-                    <input type="text" v-model="addressForm.street" id="street" name="street"
-                        placeholder="Av. Rua">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="neighborhood">Bairro</label>
-                    <input type="text" v-model="addressForm.neighborhood" id="neighborhood" name="neighborhood"
-                        placeholder="Bairro">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="city">Cidade</label>
-                    <input type="text" v-model="addressForm.city" id="city" name="city" placeholder="Vitória da Conquista-BA">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="state">Estado</label>
-                    <input type="state" v-model="addressForm.state">
-                </div>
-            </div>
-            <div class="flex">
-                <div class="flex-1 p-2">
-                    <label for="latitude">Latitude</label>
-                    <input type="text" v-model="addressForm.latitude">
-                </div>
-                <div class="flex-1 p-2">
-                    <label for="longitude">Longitude</label>
-                    <input type="text" v-model="addressForm.longitude">
-                </div>
-            </div>
-            <!--Fim endereço-->
-            <div class="flex content-center items-center justify-center">
-                <button @click="submitNewUser"
-                    class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
-                    type="submit">Enviar</button>
-            </div>
-        </form>
+            </form>
+        </main>
     </div>
 </template>

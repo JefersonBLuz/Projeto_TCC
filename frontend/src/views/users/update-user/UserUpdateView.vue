@@ -15,23 +15,13 @@ export default {
                 // password: null,
                 // privileges: null,
             },
-            addressForm:{
-                // cep: null,
-                // number: null,
-                // street: null,
-                // neighborhood: null,
-                // city: null,
-                // state: null,
-                // latitude: null,
-                // longitude: null
-            },
-            isSubmitted: false,
+            addressForm: {
+            }
         };
     },
     mounted() {
         this.getUsresAddressId()
     },
-
     methods: {
         async getUsresAddressId() {
             const { id } = this.$route.params;
@@ -62,27 +52,33 @@ export default {
     <hr class="mb-5">
     <form v-on:submit.prevent="updateUser()" method="post">
         <label for="nameuser">Nome Completo</label>
-        <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
-            name="nameuser" placeholder="Nome completo">
+        <input class="inputForms" type="text" v-model="userForm.name" id="nameuser" name="nameuser"
+            placeholder="Nome completo">
         <label for="birthday">Nascimento</label>
-        <input type="text" v-model="userForm.birthday" id="birthday" name="birthday" placeholder="YYYY-MM-DD">
+        <input class="inputForms" type="text" v-model="userForm.birthday" id="birthday" name="birthday"
+            placeholder="YYYY-MM-DD">
         <label for="cellphone">Telefone</label>
-        <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone" placeholder="5577912341234">
+        <input class="inputForms" type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone"
+            placeholder="5577912341234">
         <label for="cpf">CPF</label>
-        <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
+        <input class="inputForms" type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
         <label for="email">Email</label>
-        <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
+        <input class="inputForms" type="text" v-model="userForm.email" id="email" name="email"
+            placeholder="email@email.com">
         <label for="password">Senha</label>
-        <input type="password" v-model="userForm.password">
+        <input class="inputForms" type="password" v-model="userForm.password">
         <label for="privileges">Privilegios</label>
-        <input type="text" v-model="userForm.privileges">
-        <p>
-            <label for="active">Ativo</label>
-            <input class="size-4" type="checkbox" v-model="userForm.active">
-        </p>
+        <input class="inputForms" type="text" v-model="userForm.privileges">
+
         <br>
-        <div class="flex">
-            <button class="blue bg-gray-700 justify-self-center" type="submit">Enviar</button>
+        <br>
+        <div class="flex self-center items-center justify-items-center px-14 h-10">
+            <router-link to="/users/list"
+                class="bg-red-300 text-center basis-2/5 text-2xl rounded-lg text-red-950 h-10 hover:bg-red-950 hover:text-red-100">Cancelar</router-link>
+            <div class="basis-1/5"></div>
+            <button
+                class="bg-sky-300 basis-2/5 text-2xl rounded-lg text-sky-950 h-full hover:bg-sky-800 hover:text-sky-100"
+                type="submit">Enviar</button>
         </div>
     </form>
 </template>

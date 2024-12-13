@@ -1,10 +1,13 @@
 @import './base.css';
 
 #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0px;
+  /* padding: 2rem; */
   font-weight: normal;
+  width: 100vw;
+  height: 100vh;
 }
 .bg-color-primary{
   background-color: var(--color-primary);
@@ -43,24 +46,58 @@
   color: var(--color-text-alert-block);
 }
 
-input {
+.inputForms{
   width: 100%;
-  min-height: 30px;
+  height: 35px;
+  font-size: 13px;
   border-radius: 5px;
   border: 0.3px solid grey;
   padding: 5px 10px;
   color: var(--color-text);
   background: var(--color-background);
 }
+[data-tooltip] {
+  position: relative;
+  font-weight: bold;
+}
 
-input:focus {
+[data-tooltip]:after {
+  display: none;
+  position: absolute;
+  font-size: 12px;
+  top: 60%;
+  padding: 5px;
+  border-radius: 10px;
+  left: calc(100% + 1px );
+  content: attr(data-tooltip);
+  white-space: nowrap;
+  background-color:var(--color-background);
+  border: solid 0.5px var(--color-text);
+  color: var(--background-dark-secundaria);
+}
+
+[data-tooltip]:hover:after {
+  display: block;
+}
+.inputForms:focus {
   border: 0.3px solid grey;
   border-radius: 5px;
+  font-size: 16px;
 }
 
 button {
   text-align: center;
   width: 90%;
+}
+
+.degrader{
+  padding: 0px;
+  margin: 0px;
+  background-image: linear-gradient(to right, #034e8f, #007fb5, #0098da);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: black;
 }
 
 a,
@@ -84,17 +121,13 @@ a,
 @media (min-width: 1024px) {
   body {
     display: flex;
-    place-items: center;
-    
-  }
-
-  input {
-    min-width: 300px;
+    /* place-items: center; */
+    height: 100vh;
+    min-width: 1024px;
   }
 
   #app {
     display: flex;
     flex-direction: column;
-    
   }
 }
