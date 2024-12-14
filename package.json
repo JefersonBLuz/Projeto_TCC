@@ -6,6 +6,15 @@
   "scripts": {
     "test": "jest"
   },
+  "keywords": [
+    "nodejs",
+    "API",
+    "CRUD",
+    "express",
+    "postgressql",
+    "typescript",
+    "vuejs"
+  ],
   "author": "Jeferson Braga",
   "license": "MIT"
 }

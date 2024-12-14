@@ -1,6 +1,6 @@
-const AddressController = require ("../api/src/controllers/AddressController")
-
-const rows = require("../api/src/controllers/AddressController")
+import AddressController from "../src/controllers/address.controller";
+import { describe,test,expect } from 'jest';
+// import rows from "../src/controllers/address.controller.ts";
 
 
 
