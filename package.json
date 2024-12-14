@@ -4,9 +4,17 @@
   "description": "Aquasys é um sistema que proporciona cadastro de famílias de zonas rurais, o qual necessitam de abastecimento de água potável, também faz levantamento das regiões que estão mais necessitadas e faz o acompanhamento dos abastecimento e consumo por região atráves de Dashboard  do sistema, torando assim uma fácil e rápida leitura do cotidiando do municipio.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "author": "Jeferson Braga",
   "license": "MIT",
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5"
+  },
   "dependencies": {
+    "express": "^4.21.2"
+  }
 }
