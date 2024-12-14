@@ -53,7 +53,7 @@ const getUserName = async (name: string) => {
  */
 const postUser = async (user: any) => {
     try {
-        const response = await fetch('http://localhost:8082/users/create-user', {
+        const response = await fetch('http://localhost:8082/users/createUser', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
