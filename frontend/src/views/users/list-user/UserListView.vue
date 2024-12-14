@@ -32,14 +32,14 @@
                     <iconify-icon icon="material-symbols:lock" width="30" height="30"  class="text-sky-600 hover:text-sky-700" data-tooltip="Ativar/Inativar usuário"></iconify-icon>
                 </div>
                 <div class="flex-1 self-center">
-                    <router-link :to="{ name: 'Atualizar Usuário', params: { id: user.users.id } }">
-                        <iconify-icon icon="material-symbols:edit-square-outline-rounded" width="30" height="30"
+                    <router-link :to="{ name: 'Atualizar Usuário', params: { id: user.users.id } }" >
+                        <iconify-icon icon="material-symbols:edit-square-outline-rounded" width="30" height="30" data-tooltip="Editar usuário"
                             class="text-yellow-500"></iconify-icon>
                     </router-link>
                 </div>
                 <div class="flex-1 self-center">
                     <button @click="removerUser(user.users.id)">
-                        <iconify-icon icon="material-symbols:delete-rounded" width="30" height="30"
+                        <iconify-icon icon="material-symbols:delete-rounded" width="30" height="30" data-tooltip="Excluir usuário"
                             class="text-red-600"></iconify-icon>
                     </button>
                 </div>
