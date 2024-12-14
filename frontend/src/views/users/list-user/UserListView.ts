@@ -1,4 +1,4 @@
-import UserService from '@/services/UsersService';
+import Services from '@/services/Services';
 export default {
     name: 'UserListView',
     data() {
@@ -12,7 +12,7 @@ export default {
     methods: {
         async listAllUsers() {
             try {
-                const response = await UserService.getUsresAddressAll()
+                const response = await Services.Users.getUsresAddressAll()
                 console.log(response);
 
                 this.users = response;
@@ -22,7 +22,7 @@ export default {
         },
         async removerUser(id: number) {
             try {
-                await UserService.deleteUser(id)
+                await Services.Users.deleteUser(id)
                 console.log('delete');
                 this.listAllUsers()
             } catch (error) {
@@ -31,7 +31,7 @@ export default {
         },
         async blockUser(user: any) {
             try {
-                const response = await UserService.getUsresAddressId(user);
+                const response = await Services.Users.getUsresAddressId(user);
                 const userForm = {...response[0].users}
                 console.log(userForm);
                 console.log(userForm.active);
@@ -42,7 +42,7 @@ export default {
                 }
                 console.log(userForm.active);
                 console.log(userForm);
-                await UserService.updateUser(userForm)
+                await Services.Users.updateUser(userForm)
                 this.listAllUsers()
             } catch (error) {
 
