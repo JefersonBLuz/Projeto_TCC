@@ -1,12 +1,13 @@
-import AddressController from "../src/controllers/address.controller";
-import { describe,test,expect } from 'jest';
-// import rows from "../src/controllers/address.controller.ts";
+const address.controller  = require ("../address.controller");
+//const address = require("../address.controller")
+const db = require("../address.controller")
+
+jest.mock("../config/model/schema")
 
 
 
 
-
-describe("Address Controlller", () => {
+describe("Address Controller", () => {
     test("Adiciona endereço com sucesso", async () => {
         const req = {
             body: {
@@ -24,9 +25,14 @@ describe("Address Controlller", () => {
             status: jest.fn().mockReturnThis(),
             send: jest.fn
         }
-        await AddressController.createAddress(req, res)
+        await address.controller.createAddress(req, res)
 
-        expect(rows.add).toHaveBeenCalledTimes(1)
-        expect(res.status).toHaveBeenCalledWith(201)
+        
+        expect(res.status).toBe(201)
     })
 })
+
+
+ 
+
+
