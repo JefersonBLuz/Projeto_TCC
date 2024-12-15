@@ -1,65 +1,64 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import TruckService from '@/services/TrucksService';
 export default {
-    name: 'UserListView',
+    name: 'TruckListView',
     data() {
         return {
-            users: []
+            Trucks: []
         };
     },
     mounted() {
-        this.listAllUsers()
+        this.listAllTrucks()
     },
     methods: {
-        async listAllUsers() {
+        async listAllTrucks() {
             try {
-                const response = await UserService.getUsresAddressAll()
+                const response = await TruckService.getTrucksAddressAll()
                 console.log(response);
                 
-                this.users = response;
+                this.trucks = response;
             } catch (error) {
                 console.error('Error: ', error);
             }
         },
-        async removerUser(id: number){
-            const response = await UserService.deleteUser(id)
+        async removerTruck(id: number){
+            const response = await TruckService.deleteTruck(id)
             console.log('delete');
-            this.listAllUsers()
+            this.listAllTrucks()
         }
     }
 }
 </script>
 <template>
-    <h1 class="text-5xl mb-4 text-center"> Página de listar Usuários</h1>
+    <h1 class="text-5xl mb-4 text-center"> Página de listar Caminhões</h1>
     <hr class="mb-7">
     <main class="flex flex-col">
         <!--Divisão para cada usuários-->
-        <div class="m-1 p-0" v-for="user in users" :key="user.users.id">
+        <div class="m-1 p-0" v-for="truck in trucks" :key="truck.trucks.id">
             <!--Introdução-->
             <header class="flex flex-row min-w-min">
                 <div class="flex-1">
-                    Nome: {{ user.users.name }}
+                    Placa: {{ truck.trucks.plate }}
                 </div>
                 <div class="flex-1">
-                    CPF: {{ user.users.cpf }}
+                    Modelo: {{ truck.trucks.model}}
                 </div>
             </header>
             <!--Contatos-->
             <section class="flex flex-row min-w-min">
-                <div class="flex-1">Email: {{ user.users.email }}</div>
-                <div class="flex-1">Telefone: {{ user.users.cellphone }}</div>
+                <div class="flex-1">Ano: {{ truck.trucks.year }}</div>
+                <div class="flex-1">Proprietário: {{ truck.trucks.owner}}</div>
             </section>
             <!--Adicionais-->
             <footer class="flex flex-row min-w-min">
-                <div class="flex-1">Função: {{ user.users.privileges }}</div>
                 <div class="flex-1">
-                    <router-link :to="{name: 'Atualizar Usuário', params: {id: user.users.id}}"
+                    <router-link :to="{name: 'Atualizar Caminhão', params: {id: truck.trucks.id}}"
                     class=" bg-blue-600">
                         Editar
                     </router-link>
                 </div>
                 <div class="flex-1">
-                    <button class="bg-red-600" @click="removerUser(user.users.id)">
+                    <button class="bg-red-600" @click="removerTruck(truck.trucks.id)">
                         Delete
                     </button>
                 </div>

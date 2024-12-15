@@ -12,7 +12,7 @@
  */
 const getTruck = async () => {
     try {
-        const response = await fetch('http://localhost:8082/trucks/list-Truck', {
+        const response = await fetch('http://localhost:8082/trucks/view', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const getTruck = async () => {
  */
 const getTruckName = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/trucks/list-Truck/${name}`, {
+        const response = await fetch(`http://localhost:8082/trucks/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const getTruckName = async (name: string) => {
  */
 const postTruck = async (Truck: any) => {
     try {
-        const response = await fetch('http://localhost:8082/trucks/create-Truck', {
+        const response = await fetch('http://localhost:8082/trucks/createTruck', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const postTruck = async (Truck: any) => {
 const updateTruck = async (Truck: any) => {
     try {
         const id: number = Truck.id;
-        const response = await fetch(`http://localhost:8082/trucks/update-Truck/${id}`, {
+        const response = await fetch(`http://localhost:8082/trucks/update/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',

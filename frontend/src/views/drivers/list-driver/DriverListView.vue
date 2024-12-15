@@ -1,65 +1,67 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import DriverService from '@/services/DriversService';
 export default {
-    name: 'UserListView',
+    name: 'DriverListView',
     data() {
         return {
-            users: []
+            Drivers: []
         };
     },
     mounted() {
-        this.listAllUsers()
+        this.listAllDrivers()
     },
     methods: {
-        async listAllUsers() {
+        async listAllDrivers() {
             try {
-                const response = await UserService.getUsresAddressAll()
+                const response = await DriverService.getDriversAddressAll()
                 console.log(response);
                 
-                this.users = response;
+                this.Drivers = response;
             } catch (error) {
                 console.error('Error: ', error);
             }
         },
-        async removerUser(id: number){
-            const response = await UserService.deleteUser(id)
+        async removerDriver(id: number){
+            const response = await DriverService.deleteDriver(id)
             console.log('delete');
-            this.listAllUsers()
+            this.listAllDrivers()
         }
     }
 }
 </script>
 <template>
-    <h1 class="text-5xl mb-4 text-center"> Página de listar Usuários</h1>
+    <h1 class="text-5xl mb-4 text-center"> Página de listar Motoristas</h1>
     <hr class="mb-7">
     <main class="flex flex-col">
         <!--Divisão para cada usuários-->
-        <div class="m-1 p-0" v-for="user in users" :key="user.users.id">
+        <div class="m-1 p-0" v-for="driver in drivers" :key="driver.drivers.id">
             <!--Introdução-->
             <header class="flex flex-row min-w-min">
                 <div class="flex-1">
-                    Nome: {{ user.users.name }}
+                    Nome: {{ driver.drivers.name }}
                 </div>
                 <div class="flex-1">
-                    CPF: {{ user.users.cpf }}
+                    CPF: {{ driver.drivers.cpf }}
+                </div>
+                <div class="flex-1">
+                    CNH: {{ driver.drivers.cnh_number }}
+                </div>
+                <div class="flex-1">
+                    CNH - Categoria: {{ driver.drivers.cnh_category }}
+                </div>
+                <div class="flex-1">
+                    CNH - Vencimento: {{ driver.drivers.cnh_date }}
                 </div>
             </header>
             <!--Contatos-->
             <section class="flex flex-row min-w-min">
-                <div class="flex-1">Email: {{ user.users.email }}</div>
-                <div class="flex-1">Telefone: {{ user.users.cellphone }}</div>
+                <div class="flex-1">Email: {{ driver.drivers.email }}</div>
+                <div class="flex-1">Telefone: {{ driver.drivers.cellphone }}</div>
             </section>
             <!--Adicionais-->
             <footer class="flex flex-row min-w-min">
-                <div class="flex-1">Função: {{ user.users.privileges }}</div>
                 <div class="flex-1">
-                    <router-link :to="{name: 'Atualizar Usuário', params: {id: user.users.id}}"
-                    class=" bg-blue-600">
-                        Editar
-                    </router-link>
-                </div>
-                <div class="flex-1">
-                    <button class="bg-red-600" @click="removerUser(user.users.id)">
+                    <button class="bg-red-600" @click="removerDriver(driver.drivers.id)">
                         Delete
                     </button>
                 </div>

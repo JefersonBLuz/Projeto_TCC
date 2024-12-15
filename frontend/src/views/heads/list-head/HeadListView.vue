@@ -1,65 +1,64 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import HeadService from '@/services/HeadsService';
 export default {
-    name: 'UserListView',
+    name: 'HeadListView',
     data() {
         return {
-            users: []
+            Heads: []
         };
     },
     mounted() {
-        this.listAllUsers()
+        this.listAllHeads()
     },
     methods: {
-        async listAllUsers() {
+        async listAllHeads() {
             try {
-                const response = await UserService.getUsresAddressAll()
+                const response = await HeadService.getHeadAddressAll()
                 console.log(response);
                 
-                this.users = response;
+                this.Heads = response;
             } catch (error) {
                 console.error('Error: ', error);
             }
         },
-        async removerUser(id: number){
-            const response = await UserService.deleteUser(id)
+        async removerHead(id: number){
+            const response = await HeadService.deleteHead(id)
             console.log('delete');
-            this.listAllUsers()
+            this.listAllHeads()
         }
     }
 }
 </script>
 <template>
-    <h1 class="text-5xl mb-4 text-center"> Página de listar Usuários</h1>
+    <h1 class="text-5xl mb-4 text-center"> Página de listar Responsável da Família</h1>
     <hr class="mb-7">
     <main class="flex flex-col">
         <!--Divisão para cada usuários-->
-        <div class="m-1 p-0" v-for="user in users" :key="user.users.id">
+        <div class="m-1 p-0" v-for="Head in Heads" :key="head.heads.id">
             <!--Introdução-->
             <header class="flex flex-row min-w-min">
                 <div class="flex-1">
-                    Nome: {{ user.users.name }}
+                    Nome: {{ head.heads.name }}
                 </div>
                 <div class="flex-1">
-                    CPF: {{ user.users.cpf }}
+                    CPF: {{ head.heads.cpf }}
                 </div>
             </header>
             <!--Contatos-->
             <section class="flex flex-row min-w-min">
-                <div class="flex-1">Email: {{ user.users.email }}</div>
-                <div class="flex-1">Telefone: {{ user.users.cellphone }}</div>
+                <div class="flex-1">Email: {{ head.heads.email }}</div>
+                <div class="flex-1">Telefone: {{ Head.heads.cellphone }}</div>
             </section>
             <!--Adicionais-->
             <footer class="flex flex-row min-w-min">
-                <div class="flex-1">Função: {{ user.users.privileges }}</div>
                 <div class="flex-1">
-                    <router-link :to="{name: 'Atualizar Usuário', params: {id: user.users.id}}"
+                    <router-link :to="{name: 'Atualizar Responsável da Família', params: {id: head.heads.id}}"
                     class=" bg-blue-600">
                         Editar
                     </router-link>
                 </div>
                 <div class="flex-1">
-                    <button class="bg-red-600" @click="removerUser(user.users.id)">
+                    <button class="bg-red-600" @click="removerHead(head.heads.id)">
                         Delete
                     </button>
                 </div>

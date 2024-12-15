@@ -12,7 +12,7 @@
  */
 const getHead = async () => {
     try {
-        const response = await fetch('http://localhost:8082/heads/list-head', {
+        const response = await fetch('http://localhost:8082/heads/view', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const getHead = async () => {
  */
 const getHeadName = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/heads/list-head/${name}`, {
+        const response = await fetch(`http://localhost:8082/heads/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const getHeadName = async (name: string) => {
  */
 const postHead = async (head: any) => {
     try {
-        const response = await fetch('http://localhost:8082/heads/create-head', {
+        const response = await fetch('http://localhost:8082/heads/createHead', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const postHead = async (head: any) => {
 const updateHead = async (head: any) => {
     try {
         const id: number = head.id;
-        const response = await fetch(`http://localhost:8082/Heads/update-head/${id}`, {
+        const response = await fetch(`http://localhost:8082/Heads/update/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',

@@ -1,13 +1,13 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import HeadService from '@/services/HeadsService';
 import AddressService from '@/services/AddressService';
 import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
 
 export default {
-    name: 'MemberFamilyCreateView',
+    name: 'HeadCreateView',
     data() {
         return {
-            userForm: {
+            headForm: {
             name: null,
             address: 1,
             birthday: null,
@@ -31,12 +31,12 @@ export default {
         };
     },
     validations: {
-        userForm: {
+        headForm: {
             name: 'required'
         },
     },
     methods: {
-        handleSubmitUserForm() {
+        handleSubmitheadForm() {
             this.isSubmitted = true
             console.log('Submit successfull')
         },
@@ -50,16 +50,16 @@ export default {
 
             }
         },
-        async submitNewUser() {
+        async submitNewhead() {
             try {
                 const response = await this.submitNewAddress()
                 console.log(response);
                 
-                this.userForm.address = response
-                console.log(this.userForm);
-                await UserService.postUser(this.userForm);
+                this.headForm.address = response
+                console.log(this.headForm);
+                await headService.posthead(this.headForm);
                 this.$router.push({
-                    name: 'Listar Membros da Família'
+                    name: 'Listar Responsável '
                 })
             } catch (error) {
                 console.error('Erro:', error)
@@ -71,44 +71,44 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Membro da Família</p>
-        <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
+        <p class="text-5xl mt-5 mb-5">Cadastrar Responsável</p>
+        <form v-on:submit.prevent="handleSubmitHeadForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
-                    <label for="namedriver">Nome Completo</label>
-                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="namedriver"
-                        name="namedriver" placeholder="Nome completo">
+                    <label for="nameHead">Nome Completo</label>
+                    <input type="text" v-model="headForm.name" :class="{ 'is-invalid': isSubmitted }" id="nameHead"
+                        name="nameHead" placeholder="Nome completo">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="cpf">CPF</label>
-                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
+                    <input type="text" v-model="headForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="birthday">Nascimento</label>
-                    <input type="text" v-model="userForm.birthday" id="birthday" name="birthday"
+                    <input type="text" v-model="headForm.birthday" id="birthday" name="birthday"
                         placeholder="YYYY-MM-DD">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cellphone">Telefone</label>
-                    <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone"
+                    <input type="text" v-model="headForm.cellphone" id="cellphone" name="cellphone"
                         placeholder="5577912341234">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="email">Email</label>
-                    <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
+                    <input type="text" v-model="headForm.email" id="email" name="email" placeholder="email@email.com">
                 </div>
             </div>
             <div class="flex">
                 
                 <div class="flex-1 p-2">
                     <label for="created_by">Criado por</label>
-                    <input type="text" v-model="userForm.created_by">
+                    <input type="text" v-model="headForm.created_by">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="updated_by">Atualizado em</label>
-                    <input type="text" v-model="userForm.updated_by">
+                    <input type="text" v-model="headForm.updated_by">
                 </div>
             </div>
             <br>
@@ -159,7 +159,7 @@ export default {
             </div>
             <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
-                <button @click="submitNewUser"
+                <button @click="submitNewhead"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
                     type="submit">Enviar</button>
             </div>

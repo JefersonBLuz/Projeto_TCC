@@ -12,7 +12,7 @@
  */
 const getDriver = async () => {
     try {
-        const response = await fetch('http://localhost:8082/drivers/list-Driver', {
+        const response = await fetch('http://localhost:8082/drivers/view', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const getDriver = async () => {
  */
 const getDriverName = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/drivers/list-Driver/${name}`, {
+        const response = await fetch(`http://localhost:8082/drivers/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const getDriverName = async (name: string) => {
  */
 const postDriver = async (driver: any) => {
     try {
-        const response = await fetch('http://localhost:8082/drivers/create-Driver', {
+        const response = await fetch('http://localhost:8082/drivers/createDriver', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const postDriver = async (driver: any) => {
 const updateDriver = async (driver: any) => {
     try {
         const id: number = driver.id;
-        const response = await fetch(`http://localhost:8082/drivers/update-Driver/${id}`, {
+        const response = await fetch(`http://localhost:8082/drivers/updateDriver/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ const updateDriver = async (driver: any) => {
  */
 const deleteDriver = async (id: number) => {
     try {
-        const response = await fetch(`http://localhost:8082/drivers/delete/${id}`, {
+        const response = await fetch(`http://localhost:8082/drivers/deleteDriver/${id}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
