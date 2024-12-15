@@ -70,7 +70,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 
 const navigation = [
   { name: 'Home', href: '/home', current: true },
-  { name: 'Fámilias', href: '/', current: false },
+  { name: 'Fámilias', href: '/familly', current: false },
   { name: 'Motoristas', href: '/', current: false },
   { name: 'Veículos', href: '/', current: false },
   { name: 'Usuários', href: '/users', current: false },

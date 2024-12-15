@@ -115,7 +115,7 @@ a,
 }
 
 @media (hover: hover) {
-  a:hover {
+  .blue:hover {
     text-shadow: hsl(197, 100%, 37%) 1px 0 10px;
   }
 
