@@ -117,7 +117,7 @@ const viewHeadWithMembers = async (req: Request, res: Response) => {
 
 const viewHeadAllWithHistory = async (req: Request, res: Response) => {
     try {
-        const rows = await db.select().from(headFamily).innerJoin(history, eq(headFamily.id, history.head_id));
+        const rows = await db.select().from(headFamily).innerJoin(history, eq(headFamily.id, history.familly_id));
         res.status(200).send(rows);
     } catch (error) {
         console.log('viewHeadAllWithHistory: ', error);
@@ -131,7 +131,7 @@ const viewHeadAllWithHistory = async (req: Request, res: Response) => {
 const viewHeadWithHistory = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
-        const rows = await db.select().from(headFamily).where(eq(headFamily.id, Number(id))).innerJoin(history, eq(headFamily.id, history.head_id));
+        const rows = await db.select().from(headFamily).where(eq(headFamily.id, Number(id))).innerJoin(history, eq(headFamily.id, history.familly_id));
         res.status(200).send(rows);
     } catch (error) {
         console.error('viewHeadWithHistory: ', error);
