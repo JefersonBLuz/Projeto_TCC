@@ -41,9 +41,7 @@ export const headFamily = pgTable("head_family", {
 
 export const familyMember = pgTable("family_member", {
     ...basicInfo,
-    email: varchar({ length: 255}).notNull().unique(),
     cpf: varchar({ length: 255}).notNull().unique(),
-    cellphone: varchar({ length: 255}).notNull().unique(),
     head_id: integer().references(() => headFamily.id).notNull(),
     created_by: integer().references(() => users.id),
     updated_by: integer().references(() => users.id),
@@ -71,9 +69,17 @@ export const address = pgTable("address", {
     latitude: real().notNull(),
     longitude: real().notNull()
 });
-
+export const familly = pgTable("familly",{
+    id:integer().primaryKey().generatedAlwaysAsIdentity(),
+    name: varchar({ length: 255}),
+    headFamily: integer().references(() => headFamily.id),
+    numberfamilly: integer(),
+    idsensor: integer(),
+    volume_actual: real(),
+    volume_need: real(),
+})
 export const history = pgTable("history", {
-   head_id: integer().primaryKey().references(() => headFamily.id),
+   familly_id: integer().primaryKey().references(() => familly.id),
    date: date().notNull(),
    driver: integer().notNull().references(() => drivers.id),
    truck: integer().notNull().references(() => trucks.id),
