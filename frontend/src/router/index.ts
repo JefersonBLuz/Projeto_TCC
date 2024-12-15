@@ -60,44 +60,44 @@ const router = createRouter({
     {
       path: '/members',
       name: 'members',
-      component: () => import('@/views/members/Member.vue'),
+      component: () => import('@/views/familly/members/Member.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar Membro da Família',
-          component: () => import('@/views/members/create-member/MemberCreateView.vue'),
+          component: () => import('@/views/familly/members/create-member/MemberCreateView.vue'),
         }, 
         {
           path: 'list',
           name: 'Listar Membro da Família',
-          component: () => import('@/views/members/list-member/MemberListView.vue'),
+          component: () => import('@/views/familly/members/list-member/MemberListView.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Membro da Família',
-          component: () => import('@/views/members/update-member/MemberUpdateView.vue'),
+          component: () => import('@/views/familly/members/update-member/MemberUpdateView.vue'),
         }
       ]
     },
     {
-      path: '/heads',
-      name: 'heads',
-      component: () => import('@/views/heads/Head.vue'),
+      path: '/familly',
+      name: 'Familías',
+      component: () => import('@/views/familly/FamillyMenu.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar Familiar Responsável',
-          component: () => import('@/views/heads/create-head/HeadCreateView.vue'),
+          component: () => import('@/views/familly/heads/create-head/HeadCreateView.vue'),
         }, 
         {
           path: 'list',
           name: 'Listar Familiar Responsável',
-          component: () => import('@/views/heads/list-head/HeadListView.vue'),
+          component: () => import('@/views/familly/heads/list-head/HeadListView.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Familiar Responsável',
-          component: () => import('@/views/heads/update-head/HeadUpdateView.vue'),
+          component: () => import('@/views/familly/heads/update-head/HeadUpdateView.vue'),
         }
       ]
     },
