@@ -10,9 +10,7 @@ const createMember = async (req: Request, res: Response) => {
             name: nameuser,
             address: address,
             birthday: birthday,
-            cellphone: cellphone,
             cpf: cpf,
-            email: email,
             head_id: head_id,
             created_by: created_by,
             updated_by: updated_by
@@ -124,9 +122,7 @@ const updateMember = async (req: Request, res: Response) => {
             name: nameuser,
             address: address,
             birthday: birthday,
-            cellphone: cellphone,
             cpf: cpf,
-            email: email,
             head_id: head_id,
             created_by: created_by,
             updated_by: updated_by
