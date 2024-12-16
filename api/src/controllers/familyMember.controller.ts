@@ -4,7 +4,7 @@ import { address, headFamily, familyMember } from "../config/model/schema";
 import { console } from "inspector";
 
 const createMember = async (req: Request, res: Response) => {
-    const { name, birthday, address, email, cpf, cellphone, head_id, created_by, updated_by } = req.body;
+    const { name, birthday, address, cpf, head_id, created_by, updated_by } = req.body;
     try {
         const rows = await db.insert(familyMember).values({
             name: name,

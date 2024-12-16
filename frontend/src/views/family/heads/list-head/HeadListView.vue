@@ -36,7 +36,7 @@ export default {
 <template>
    <header class="flex my-4 w-full flex-col lg:flex-row">
         <h1 class="text-5xl basis-10/12">Famílias</h1>
-        <router-link to="/familly/create" class="flex-1 w-3/6 bg-sky-500 rounded-xl text-center flex justify-evenly lg:m-0 mt-4">
+        <router-link to="/family/create" class="flex-1 w-3/6 bg-sky-500 rounded-xl text-center flex justify-evenly lg:m-0 mt-4">
             <iconify-icon icon="material-symbols:add-2-rounded" width="35" height="35"
                 class="self-center text-center text-slate-200"></iconify-icon>
             <span class="text-slate-200 text-lg self-center leading-none">Adicionar Família</span>

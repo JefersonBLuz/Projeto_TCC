@@ -10,9 +10,9 @@
  * Método responsável por listar todos os 'Usuários' sem 'Address'.
  * (GET): localhost:3000/users/view
  */
-const getFamillyAll = async () => {
+const getFamilyAll = async () => {
     try {
-        const response = await fetch('http://localhost:8082/familly/view', {
+        const response = await fetch('http://localhost:8082/family/view', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -32,9 +32,9 @@ const getFamillyAll = async () => {
  * Método responsável por listar 'Usuário' por 'name' sem 'Address'.
  * (GET): localhost:3000/users/view/:name
  */
-const getFamillyName = async (name: string) => {
+const getFamilyName = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/familly/view/${name}`, {
+        const response = await fetch(`http://localhost:8082/family/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,9 +51,9 @@ const getFamillyName = async (name: string) => {
  * Método responsável por criar um novo(a) 'Usuário'
  * (POST): localhost:3000/users/createUser
  */
-const postFamilly = async (head: any) => {
+const postFamily = async (head: any) => {
     try {
-        const response = await fetch('http://localhost:8082/familly/createFamilly', {
+        const response = await fetch('http://localhost:8082/family/createFamily', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -78,10 +78,10 @@ const postFamilly = async (head: any) => {
  * Método responsável por atualizar um determinado 'Usuário' por 'Id'.
  * (PUT): localhost:3000/users/update/:id
  */
-const updateFamilly = async (head: any) => {
+const updateFamily = async (head: any) => {
     try {
         const id: number = head.id;
-        const response = await fetch(`http://localhost:8082/familly/update/${id}`, {
+        const response = await fetch(`http://localhost:8082/family/update/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,9 +102,9 @@ const updateFamilly = async (head: any) => {
  * Método responsável por excluir um determinado 'Usuário' por 'Id'.
  * (DELETE): localhost:3000/users/delete/:id
  */
-const deleteFamilly = async (id: number) => {
+const deleteFamily = async (id: number) => {
     try {
-        const response = await fetch(`http://localhost:8082/familly/delete/${id}`, {
+        const response = await fetch(`http://localhost:8082/family/delete/${id}`, {
             method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
@@ -117,4 +117,4 @@ const deleteFamilly = async (id: number) => {
     }
 }
 
-export default { getFamillyAll, getFamillyName, postFamilly, deleteFamilly, updateFamilly}
+export default { getFamilyAll, getFamilyName, postFamily, deleteFamily, updateFamily}

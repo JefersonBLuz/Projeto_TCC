@@ -14,6 +14,18 @@ const router = createRouter({
       component: () => import('@/views/Home.vue'),
     },
     {
+      path: '/graf',
+      name: 'Grafico',
+      component: () => import('@/views/HomeGrafico.vue'),
+      children: [
+        {
+          path: 'view',
+          name: 'Ver Gráficos',
+          component: () => import('@/views/graficos/GraficosView.vue')
+        }
+      ]
+    },
+    {
       path: '/users',
       name: 'Usuários',
       component: () => import('@/views/users/UsersMenu.vue'),
@@ -22,7 +34,7 @@ const router = createRouter({
           path: 'create',
           name: 'Criar usuário',
           component: () => import('@/views/users/create-user/UserCreateView.vue'),
-        }, 
+        },
         {
           path: 'list',
           name: 'Listar Usuários',
@@ -38,13 +50,13 @@ const router = createRouter({
     {
       path: '/drivers',
       name: 'drivers',
-      component: () => import('@/views/drivers/Drivers.vue'),
+      component: () => import('@/views/drivers/DriversMenu.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar Motorista',
           component: () => import('@/views/drivers/create-driver/DriverCreateView.vue'),
-        }, 
+        },
         {
           path: 'list',
           name: 'Listar Motorista',
@@ -60,44 +72,44 @@ const router = createRouter({
     {
       path: '/members',
       name: 'members',
-      component: () => import('@/views/familly/members/Member.vue'),
+      component: () => import('@/views/family/members/Member.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar Membro da Família',
-          component: () => import('@/views/familly/members/create-member/MemberCreateView.vue'),
-        }, 
+          component: () => import('@/views/family/members/create-member/MemberCreateView.vue'),
+        },
         {
           path: 'list',
           name: 'Listar Membro da Família',
-          component: () => import('@/views/familly/members/list-member/MemberListView.vue'),
+          component: () => import('@/views/family/members/list-member/MemberListView.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Membro da Família',
-          component: () => import('@/views/familly/members/update-member/MemberUpdateView.vue'),
+          component: () => import('@/views/family/members/update-member/MemberUpdateView.vue'),
         }
       ]
     },
     {
-      path: '/familly',
-      name: 'Familías',
-      component: () => import('@/views/familly/FamillyMenu.vue'),
+      path: '/family',
+      name: 'Famílias',
+      component: () => import('@/views/family/FamilyMenu.vue'),
       children: [
         {
           path: 'create',
           name: 'Criar Familiar Responsável',
-          component: () => import('@/views/familly/heads/create-head/HeadCreateView.vue'),
-        }, 
+          component: () => import('@/views/family/heads/create-head/HeadCreateView.vue'),
+        },
         {
           path: 'list',
           name: 'Listar Familiar Responsável',
-          component: () => import('@/views/familly/heads/list-head/HeadListView.vue'),
+          component: () => import('@/views/family/heads/list-head/HeadListView.vue'),
         },
         {
           path: 'edit/:id',
           name: 'Atualizar Familiar Responsável',
-          component: () => import('@/views/familly/heads/update-head/HeadUpdateView.vue'),
+          component: () => import('@/views/family/heads/update-head/HeadUpdateView.vue'),
         }
       ]
     },
@@ -110,7 +122,7 @@ const router = createRouter({
           path: 'create',
           name: 'Criar Veículo',
           component: () => import('@/views/trucks/create-trucks/TrucksCreateView.vue'),
-        }, 
+        },
         {
           path: 'list',
           name: 'Listar Veículo',

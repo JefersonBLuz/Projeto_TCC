@@ -74,7 +74,7 @@ export const familly = pgTable("familly",{
     name: varchar({ length: 255}),
     headFamily: integer().references(() => headFamily.id),
     region: varchar({length: 255}),
-    numberfamilly: integer(),
+    numberfamily: integer(),
     idsensor: integer(),
     volume_actual: real(),
     volume_need: real(),
