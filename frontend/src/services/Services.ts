@@ -11,5 +11,6 @@ import Heads from "./HeadsService";
 import Members from "./MembersService";
 import Drivers from "./DriversService";
 import Trucks from "./TrucksService";
+import Familly from "./FamillyService";
 
-export default { Address, Users, Heads, Members, Drivers, Trucks}
+export default { Address, Users, Heads, Members, Drivers, Trucks, Familly}

@@ -12,7 +12,7 @@
  */
 const getMember = async () => {
     try {
-        const response = await fetch('http://localhost:8082/members/list-member', {
+        const response = await fetch('http://localhost:8082/members/view', {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ const getMember = async () => {
  */
 const getMemberName = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/members/list-member/${name}`, {
+        const response = await fetch(`http://localhost:8082/members/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const getMemberName = async (name: string) => {
  */
 const postMember = async (member: any) => {
     try {
-        const response = await fetch('http://localhost:8082/members/create-member', {
+        const response = await fetch('http://localhost:8082/members/createMember', {
             method: 'post',
             headers: {
                 'Content-Type': 'application/json',
@@ -80,7 +80,7 @@ const postMember = async (member: any) => {
 const updateMember = async (member: any) => {
     try {
         const id: number = member.id;
-        const response = await fetch(`http://localhost:8082/members/update-member/${id}`, {
+        const response = await fetch(`http://localhost:8082/members/update/${id}`, {
             method: 'put',
             headers: {
                 'Content-Type': 'application/json',
@@ -122,7 +122,7 @@ const deleteMember = async (id: number) => {
  */
 const getMemberAddressAll = async () => {
     try {
-        const response = await fetch(`http://localhost:8082/members/viewaddress`, {
+        const response = await fetch(`http://localhost:8082/members/viewAddress`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json',
@@ -144,7 +144,7 @@ const getMemberAddressAll = async () => {
  */
 const getMemberAddress = async (name: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/members/viewaddress/${name}`, {
+        const response = await fetch(`http://localhost:8082/members/view/${name}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -163,7 +163,7 @@ const getMemberAddress = async (name: string) => {
  */
 const getMemberAddressId = async (id: string) => {
     try {
-        const response = await fetch(`http://localhost:8082/members/viewaddressid/${id}`, {
+        const response = await fetch(`http://localhost:8082/members/viewAddress/${id}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'

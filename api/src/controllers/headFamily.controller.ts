@@ -4,10 +4,10 @@ import { address, headFamily, familyMember, history } from "../config/model/sche
 import { console } from "inspector";
 
 const createHead = async (req: Request, res: Response) => {
-    const { nameuser, birthday, address, email, cpf, cellphone, created_by, updated_by } = req.body;
+    const { name, birthday, address, email, cpf, cellphone, created_by, updated_by } = req.body;
     try {
         const rows = await db.insert(headFamily).values({
-            name: nameuser,
+            name: name,
             address: address,
             birthday: birthday,
             cellphone: cellphone,
@@ -19,7 +19,7 @@ const createHead = async (req: Request, res: Response) => {
         res.status(201).send({
             message: 'Head of the family added successfully!',
             body: {
-                user: {
+                head: {
                     rows
                 },
             },           

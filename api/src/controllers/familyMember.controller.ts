@@ -4,10 +4,10 @@ import { address, headFamily, familyMember } from "../config/model/schema";
 import { console } from "inspector";
 
 const createMember = async (req: Request, res: Response) => {
-    const { nameuser, birthday, address, email, cpf, cellphone, head_id, created_by, updated_by } = req.body;
+    const { name, birthday, address, email, cpf, cellphone, head_id, created_by, updated_by } = req.body;
     try {
         const rows = await db.insert(familyMember).values({
-            name: nameuser,
+            name: name,
             address: address,
             birthday: birthday,
             cpf: cpf,
@@ -18,7 +18,7 @@ const createMember = async (req: Request, res: Response) => {
         res.status(201).send({
             message: 'Member added successfully!',
             body: {
-                user: {
+                member: {
                     rows
                 },
             },           

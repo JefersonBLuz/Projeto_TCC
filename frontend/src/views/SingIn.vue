@@ -13,7 +13,7 @@ export default {
   methods: {
     loginUser(){
       if(this.login.username === 'admin' && this.login.password === 'admin'){
-        return this.$router.push({name: 'Usuários'})
+        return this.$router.push({name: 'Home'})
       }
       if(this.login.username === null && this.login.password === null){
         return false

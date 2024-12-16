@@ -5,7 +5,7 @@ const router = Router()
 const membersController = MembersController
 
 
-router.post('/createHead', membersController.createMember)
+router.post('/createMember', membersController.createMember)
 
 router.get('/view', membersController.viewMembersAll)
 

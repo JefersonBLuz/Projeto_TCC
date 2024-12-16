@@ -73,6 +73,7 @@ export const familly = pgTable("familly",{
     id:integer().primaryKey().generatedAlwaysAsIdentity(),
     name: varchar({ length: 255}),
     headFamily: integer().references(() => headFamily.id),
+    region: varchar({length: 255}),
     numberfamilly: integer(),
     idsensor: integer(),
     volume_actual: real(),
