@@ -3,20 +3,20 @@ import { db, eq } from "../config/db";
 import { familly } from "../config/model/schema";
 import { console } from "inspector";
 
-const createFamilly = async (req: Request, res: Response) => {
-    const { name, region, headFamily, numberfamilly, idsensor, volume_actual, volume_need } = req.body;
+const createFamily = async (req: Request, res: Response) => {
+    const { name, region, headFamily, numberfamily, idsensor, volume_actual, volume_need } = req.body;
     try {
         const rows = await db.insert(familly).values({
             name: name,
             headFamily: headFamily,
-            numberfamilly: numberfamilly,
+            numberfamily: numberfamily,
             idsensor: idsensor,
             region: region,
             volume_actual: volume_actual,
             volume_need: volume_need,
         }).returning();
         res.status(201).send({
-            message: 'Head of the family added successfully!',
+            message: 'Family added successfully!',
             body: {
                 familly: {
                     rows
@@ -32,7 +32,7 @@ const createFamilly = async (req: Request, res: Response) => {
     }
 }
 
-const viewFamillyAll = async (req: Request, res: Response) => {
+const viewFamilyAll = async (req: Request, res: Response) => {
     try {
         const rows = await db.select().from(familly);
         res.status(200).send(rows);
@@ -45,7 +45,7 @@ const viewFamillyAll = async (req: Request, res: Response) => {
     }
 }
 
-const viewFamillyName = async (req: Request, res: Response) => {
+const viewFamilyName = async (req: Request, res: Response) => {
     const { name } = req.params;
     try {
         const rows = await db.select().from(familly).where(eq(familly.name, name)
@@ -61,14 +61,14 @@ const viewFamillyName = async (req: Request, res: Response) => {
 }
 
 
-const updateFamilly = async (req: Request, res: Response) => {
+const updateFamily = async (req: Request, res: Response) => {
     const { id } = req.params
-    const { name, region, headFamily, numberfamilly, idsensor, volume_actual, volume_need } = req.body;
+    const { name, region, headFamily, numberfamily, idsensor, volume_actual, volume_need } = req.body;
     try {
         const rows = await db.update(familly).set({
             name: name,
             headFamily: headFamily,
-            numberfamilly: numberfamilly,
+            numberfamily: numberfamily,
             idsensor: idsensor,
             region: region,
             volume_actual: volume_actual,
@@ -86,7 +86,7 @@ const updateFamilly = async (req: Request, res: Response) => {
     }
 }
 
-const deleteFamilly = async (req: Request, res: Response) => {
+const deleteFamily = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         const rows = await db.delete(familly).where(eq(familly.id, Number(id)));
@@ -102,4 +102,4 @@ const deleteFamilly = async (req: Request, res: Response) => {
     }
 }
 
-export default { createFamilly, viewFamillyAll, viewFamillyName, deleteFamilly, updateFamilly}
+export default { createFamily, viewFamilyAll, viewFamilyName, deleteFamily, updateFamily}

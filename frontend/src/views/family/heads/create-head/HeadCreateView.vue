@@ -1,153 +1,12 @@
-<script lang="ts">
-import UserService from '@/services/UsersService';
-import getCord from '@/utils/cord'
-import Services from '@/services/Services';
-import { elements } from 'chart.js';
+<script lang="ts" src="./HeadCreateView.ts" >
 
-
-export default {
-    name: 'MemberFamilyCreateView',
-    data() {
-        return {
-            headFamilly: {
-                name: null,
-                birthday: null,
-                address: 1,
-                email: null,
-                cpf: null,
-                cellphone: null,
-                created_by: null,
-                updated_by: null,
-            },
-            familly: {
-                name: null,
-                headFamily: 0,
-                numberfamilly: 0,
-                idsensor: null,
-                region: '',
-                volume_actual: 0,
-                volume_need: 0,
-            },
-            memberFamilly: [{
-                name: '',
-                birthday: '',
-                address: 1,
-                cpf: '',
-                head_id: 1,
-                created_by: '',
-                updated_by: '',
-            }],
-            addressForm: {
-                cep: null,
-                number: null,
-                street: null,
-                neighborhood: null,
-                city: null,
-                state: null,
-                latitude: null,
-                longitude: null
-            },
-            isSubmitted: false,
-        };
-    },
-    validations: {
-        headFamilly: {
-            name: 'required'
-        },
-    },
-    mounted() {
-        // this.dropMember()
-    },
-    methods: {
-        async dropMember() {
-            this.memberFamilly.pop()
-        },
-        async addSpaceMember() {
-            this.memberFamilly.push({
-                name: '',
-                birthday: '',
-                address: 1,
-                cpf: '',
-                head_id: 1,
-                created_by: '',
-                updated_by: '',
-            })
-        },
-        handleSubmitheadFamilly() {
-            this.isSubmitted = true
-            console.log('Submit successfull')
-        },
-        async submitNewAddress() {
-            try {
-                const res = await Services.Address.postAddress(this.addressForm)
-                return res
-            } catch (error) {
-                console.error('Erro: ', error)
-            }
-        },
-        async submitMemberFamilly(addressID: number, head: number) {
-            this.memberFamilly.forEach(async (elment) => {
-                elment.address = addressID;
-                elment.head_id = head;
-                
-            }
-        )
-        for (let index = 0; index < this.memberFamilly.length; index++) {
-                await Services.Members.postMember(this.memberFamilly[index]);
-
-            }
-            console.log('Membros registrados');
-        },
-        async submitHeadFamilly(addressID: number) {
-            this.headFamilly.address = addressID;
-            const res = await Services.Heads.postHead(this.headFamilly)
-            return res
-        },
-        async submitNewFamilly() {
-            try {
-                const address = await this.submitNewAddress()
-                console.log(address);
-                const addressID: number = address.body.address.rows[0].id
-                const headFamily = await this.submitHeadFamilly(addressID)
-                const headID: number = headFamily.body.head.rows[0].id
-                const member = await this.submitMemberFamilly(addressID, headID)
-                this.familly.name = headFamily.body.head.rows[0].name
-                this.familly.region = 'Bate-pe';
-                this.familly.numberfamilly = this.memberFamilly.length + 1
-                this.familly.volume_need = this.familly.numberfamilly * 30 * 30
-                this.familly.volume_actual = this.familly.volume_need * 0.7
-                this.familly.headFamily = headID
-                await Services.Familly.postFamilly(this.familly).then(() => {
-                    console.log('Familia cadastrada');
-
-                })
-                this.$router.push({
-                    name: 'Famílias'
-                })
-            } catch (error) {
-                console.error('Erro:', error)
-                return error
-            }
-        },
-        async getEndereco() {
-            try {
-                const query: string = String(this.addressForm.cep)
-                const response = await getCord.getCord(query);
-                this.addressForm = { ...response }
-
-            } catch (error) {
-
-            }
-        },
-    },
-};
 </script>
 <template>
     <div class="flex flex-col justify-self-center w-full self-center justify-items-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Família</p>
+        <p class="text-5xl mt-5 mb-5">Cadastro de Família</p>
         <hr class=" bg-gray-500 h-1 border-0">
         <main class="justify-center">
-            <form v-on:submit.prevent="handleSubmitheadFamilly()" method="post">
+            <form v-on:submit.prevent="handleSubmitheadFamily()" method="post">
                 <!--Inicio de botões-->
                 <div class="flex flex-col lg:flex-row content-center items-center justify-end my-2">
                     <button @click="addSpaceMember"
@@ -157,7 +16,7 @@ export default {
                     <router-link to="/familly/list"
                         class="bg-red-400 rounded-lg justify-self-center w-2/12 content-center text-xl text-center text-red-950 h-12 hover:bg-red-700 mr-2">
                         Cancelar</router-link>
-                    <button @click="submitNewFamilly"
+                    <button @click="submitNewFamily"
                         class="bg-green-300 justify-self-center w-2/12 text-xl h-12 rounded-lg content-center hover:bg-green-600 text-green-950"
                         type="submit">Adicionar</button>
                 </div>
@@ -171,30 +30,30 @@ export default {
                         <div class="flex flex-col lg:flex-row">
                             <div class="basis-2/4 p-2">
                                 <label for="nameuser" class="text-lg">Nome Completo</label><br>
-                                <input class="inputForms" type="text" v-model="headFamilly.name"
+                                <input class="inputForms" type="text" v-model="headFamily.name"
                                     :class="{ 'is-invalid': isSubmitted }" id="nameuser" name="nameuser"
                                     placeholder="Nome completo">
                             </div>
                             <div class="basis-1/4 p-2 text-lg">
                                 <label for="birthday" class="text-lg">Nascimento</label><br>
-                                <input class="inputForms" type="text" v-model="headFamilly.birthday" id="birthday"
+                                <input class="inputForms" type="text" v-model="headFamily.birthday" id="birthday"
                                     name="birthday" placeholder="YYYY-MM-DD">
                             </div>
                             <div class="flex-1 p-2">
                                 <label for="cpf" class="text-lg">CPF</label><br>
-                                <input class="inputForms" type="text" v-model="headFamilly.cpf" id="cpf" name="cpf"
+                                <input class="inputForms" type="text" v-model="headFamily.cpf" id="cpf" name="cpf"
                                     placeholder="12312312355">
                             </div>
                         </div>
                         <div class="flex flex-col lg:flex-row">
                             <div class="flex-1 p-2">
                                 <label for="email" class="text-lg">Email</label><br>
-                                <input class="inputForms" type="text" v-model="headFamilly.email" id="email"
+                                <input class="inputForms" type="text" v-model="headFamily.email" id="email"
                                     name="email" placeholder="email@email.com">
                             </div>
                             <div class="flex-1 p-2">
                                 <label for="cellphone" class="text-lg">Telefone</label><br>
-                                <input class="inputForms" type="text" v-model="headFamilly.cellphone" id="cellphone"
+                                <input class="inputForms" type="text" v-model="headFamily.cellphone" id="cellphone"
                                     name="cellphone" placeholder="5577912341234">
                             </div>
                         </div>
@@ -202,9 +61,9 @@ export default {
                 </section>
                 <!--Fim Informação de chefe de fámilia-->
                 <!--Inicio da div para Membros de fámila-->
-                <section class="flex flex-col mt-4" v-for="(member, index) in memberFamilly" :key="index">
+                <section class="flex flex-col mt-4" v-for="(member, index) in memberFamily" :key="index">
                     <h1
-                        class="text-4xl border-x border-t bg-blue-300 text-blue-950 p-2 pl-4 rounded-t-xl border-gray-500">
+                        class="text-4xl border-x border-t bg-blue-300 text-blue-950 p-2 pl-4 rounded-t-xl border-gray-500" @click="" > 
                         Membro {{ index + 1 }} da família</h1>
                     <div class="border p-2 rounded-b-xl border-gray-500">
                         <div class="flex flex-col lg:flex-row">

@@ -7,7 +7,7 @@ import Trucks from './routes/trucks.routes';
 import Drivers from './routes/drivers.routes';
 import Heads from './routes/headFamily.routes';
 import Members from './routes/familyMember.routes';
-import Familly from './routes/familly.routes'
+import Family from './routes/family.routes'
 
 
 const router = Router()
@@ -17,7 +17,7 @@ const trucksRoutes = Trucks
 const driversRoutes = Drivers
 const headsRoutes = Heads
 const membersRoutes = Members
-const famillyRoutes = Familly
+const familyRoutes = Family
 
 const firstController = new FirstController()
 const test = new Test()
@@ -40,6 +40,6 @@ router.use('/trucks/', trucksRoutes)
 router.use('/drivers/', driversRoutes)
 router.use('/heads/', headsRoutes)
 router.use('/members/', membersRoutes)
-router.use('/familly/', famillyRoutes);
+router.use('/family/', familyRoutes);
 
 export default router;
