@@ -108,7 +108,7 @@ export default {
                 // Instanciando informações da famílias.
                 this.family.name = headFamily.body.head.rows[0].name
                 this.family.region = address.body.address.rows[0].neighborhood;
-                this.family.numberfamilly = this.memberFamily.length + 1
+                this.family.numberfamily = this.memberFamily.length + 1
                 this.family.volume_need = this.family.numberfamily * 30 * 30
                 this.family.volume_actual = this.family.volume_need * 0.7
                 this.family.headFamily = headID

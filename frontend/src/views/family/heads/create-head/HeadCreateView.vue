@@ -1,10 +1,12 @@
-<script lang="ts" src="./HeadCreateView.ts" ></script>
+<script lang="ts" src="./HeadCreateView.ts" >
+
+</script>
 <template>
     <div class="flex flex-col justify-self-center w-full self-center justify-items-center">
         <p class="text-5xl mt-5 mb-5">Cadastro de Família</p>
         <hr class=" bg-gray-500 h-1 border-0">
         <main class="justify-center">
-            <form v-on:submit.prevent="handleSubmitheadFamilly()" method="post">
+            <form v-on:submit.prevent="handleSubmitheadFamily()" method="post">
                 <!--Inicio de botões-->
                 <div class="flex flex-col lg:flex-row content-center items-center justify-end my-2">
                     <button @click="addSpaceMember"
