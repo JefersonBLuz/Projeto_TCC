@@ -1,8 +1,10 @@
-const address.controller  = require ("../address.controller");
-//const address = require("../address.controller")
-const db = require("../address.controller")
+import addressController from "../address.controller"
+import createAddress from "../address.controller"
 
-jest.mock("../config/model/schema")
+
+jest.mock("../address.controller", () => {
+    createAddress: jest.fn()
+})
 
 
 
@@ -11,26 +13,32 @@ describe("Address Controller", () => {
     test("Adiciona endereço com sucesso", async () => {
         const req = {
             body: {
-                cep: "12003-123",
-                number: "10",
-                street: "Rua B",
-                neighborhood: "Bela Vista",
-                city: "Vitória da Conquista",
-                state: "BA",
-                latitude: "000000",
-                longitude: "000000"
+            cep: "13003-123",
+            number: "10",
+            street: "Rua B",
+            neighborhood: "Bela Vista",
+            city: "Vitoria da Conquista",
+            state: "BA",
+            latitude: "000000",
+            longitude: "000000"
+            
             }
         }
+
         const res = {
             status: jest.fn().mockReturnThis(),
-            send: jest.fn
+            send: jest.fn()
         }
-        await address.controller.createAddress(req, res)
+
+      await addressController.createAddress(req, res)
 
         
-        expect(res.status).toBe(201)
+      expect(res.status).toBe(201)
+
     })
 })
+
+        
 
 
  
