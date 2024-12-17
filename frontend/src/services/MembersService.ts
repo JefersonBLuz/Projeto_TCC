@@ -105,7 +105,7 @@ const postMember = async (member: any) => {
             return res;
         }
         console.log(res)
-        return alert('Criado com sucesso: ')
+        return
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
     }
@@ -130,7 +130,7 @@ const updateMember = async (member: any) => {
         if (!response.ok) {
             return res;
         }
-        return alert('Atualizado com sucesso')
+        return 
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
     }

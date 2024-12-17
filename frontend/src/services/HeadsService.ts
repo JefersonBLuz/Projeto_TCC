@@ -66,7 +66,6 @@ const postHead = async (head: any) => {
             return res;
         }
         console.log(res)
-        alert('Criado com sucesso HEAD')
         return res
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
@@ -92,7 +91,7 @@ const updateHead = async (head: any) => {
         if (!response.ok) {
             return res;
         }
-        return alert('Atualizado com sucesso')
+        return 
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
     }

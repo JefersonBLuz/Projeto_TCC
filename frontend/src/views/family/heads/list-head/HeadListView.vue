@@ -22,7 +22,7 @@ export default {
 
                 this.family = response;
                 this.family.forEach(async element => {
-                    let idHead: number = element.headFamily
+                    let idHead: number = element.head_id
                     element.head = await Services.Heads.getHeadID(idHead)
                     element.members = await Services.Members.getMemberOfHead(idHead)
                     element.percentual = element.volume_actual / element.volume_need

@@ -49,7 +49,7 @@ const updateAddress = async (address: any) => {
         if (!response.ok) {
             return res;
         }
-        return alert('Atualizado com sucesso')
+        return
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)
     }

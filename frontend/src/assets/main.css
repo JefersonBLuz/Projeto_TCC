@@ -137,6 +137,10 @@ button {
   transition: 0.4s;
   padding: 3px;
 }
+nav a.router-link-exact-active {
+  color: white;
+  background-color:#0098da;
+}
 
 @media (hover: hover) {
   .blue:hover {

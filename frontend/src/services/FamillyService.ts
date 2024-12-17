@@ -66,7 +66,6 @@ const postFamily = async (head: any) => {
             return res;
         }
         console.log(res)
-        alert('head criado')
         return res
     } catch (error) {
         return console.error('Erro a fazer a requisição: ', error)

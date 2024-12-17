@@ -12,17 +12,16 @@ const router = createRouter({
       path: '/home',
       name: 'Home',
       component: () => import('@/views/Home.vue'),
-    },
-    {
-      path: '/graf',
-      name: 'Grafico',
-      component: () => import('@/views/HomeGrafico.vue'),
-      children: [
-        {
-          path: 'view',
-          name: 'Ver Gráficos',
-          component: () => import('@/views/graficos/GraficosView.vue')
-        }
+      children: [{
+        path: 'view',
+        name: 'Grafico1',
+        component: () => import('@/views/graficos/grafico1.vue')
+      },
+      {
+        path: 'history',
+        name: 'Grafico2',
+        component: () => import('@/views/graficos/grafico2.vue'),
+      }
       ]
     },
     {
