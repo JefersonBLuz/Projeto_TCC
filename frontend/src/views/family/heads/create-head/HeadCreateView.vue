@@ -1,4 +1,4 @@
-<script lang="ts" src="./HeadCreateView.ts" >
+<script lang="ts" src="./HeadCreateView.ts">
 
 </script>
 <template>
@@ -8,17 +8,40 @@
         <main class="justify-center">
             <form v-on:submit.prevent="handleSubmitheadFamily()" method="post">
                 <!--Inicio de botões-->
-                <div class="flex flex-col lg:flex-row content-center items-center justify-end my-2">
-                    <button @click="addSpaceMember"
-                        class="bg-yellow-100 rounded-lg justify-self-center w-3/12 content-center text-xl text-center text-red-950 h-12 hover:bg-yellow-700 mr-2">
-                        Adicionar Membro
-                    </button>
-                    <router-link to="/familly/list"
-                        class="bg-red-400 rounded-lg justify-self-center w-2/12 content-center text-xl text-center text-red-950 h-12 hover:bg-red-700 mr-2">
-                        Cancelar</router-link>
-                    <button @click="submitNewFamily"
-                        class="bg-green-300 justify-self-center w-2/12 text-xl h-12 rounded-lg content-center hover:bg-green-600 text-green-950"
-                        type="submit">Adicionar</button>
+                <div class="flex flex-col lg:flex-row content-center items-center justify-start my-2">
+                    <div class="basis-3/5 justify-start flex">
+                        <button @click="addSpaceMember"
+                            class="bg-yellow-100 rounded-lg justify-self-center w-4/12 content-center text-xl text-center text-red-950 h-12 hover:bg-yellow-700 mr-2 flex flex-row justify-start">
+                            <div class="basis-1/5 h-full items-center justify-center flex">
+                                <iconify-icon icon="material-symbols:add-2-rounded" width="30" height="30"></iconify-icon>
+                            </div>
+                            <div class="basis-4/5 self-center text-start">
+                                Adicionar Membro
+                            </div>
+                        </button>
+                    </div>
+                    <div class="basis-2/5 w-auto flex items-end justify-end ">
+                        <router-link to="/family/list"
+                            class="bg-red-400 rounded-lg justify-self-center w-4/12 content-center text-xl text-center text-red-950 h-12 hover:bg-red-700 mr-2 flex-row flex">
+                            <div class="basis-1/3 h-full items-center justify-center flex">
+                                <iconify-icon icon="material-symbols:close-rounded" width="30" height="30"></iconify-icon>
+                            </div>
+                            <div class="basis-2/3 self-center text-start">
+                                Cancelar
+                            </div>
+                            </router-link>
+                        <button @click="submitNewFamily"
+                            class="bg-green-300 justify-self-center w-4/12 text-xl h-12 rounded-lg content-center hover:bg-green-600 text-green-950 flex-row flex"
+                            type="submit">
+                            <div class="basis-1/3 h-full items-center justify-center flex">
+                                <iconify-icon icon="material-symbols:save-rounded" width="30"
+                                    height="30" ></iconify-icon>
+                            </div>
+                            <div class="basis-2/3 self-center text-start">
+                                Adicionar
+                            </div>
+                        </button>
+                    </div>
                 </div>
                 <!--Fim de botões-->
                 <!--Informação de chefe de fámilia-->
@@ -48,8 +71,8 @@
                         <div class="flex flex-col lg:flex-row">
                             <div class="flex-1 p-2">
                                 <label for="email" class="text-lg">Email</label><br>
-                                <input class="inputForms" type="text" v-model="headFamily.email" id="email"
-                                    name="email" placeholder="email@email.com">
+                                <input class="inputForms" type="text" v-model="headFamily.email" id="email" name="email"
+                                    placeholder="email@email.com">
                             </div>
                             <div class="flex-1 p-2">
                                 <label for="cellphone" class="text-lg">Telefone</label><br>
@@ -62,8 +85,8 @@
                 <!--Fim Informação de chefe de fámilia-->
                 <!--Inicio da div para Membros de fámila-->
                 <section class="flex flex-col mt-4" v-for="(member, index) in memberFamily" :key="index">
-                    <h1
-                        class="text-4xl border-x border-t bg-blue-300 text-blue-950 p-2 pl-4 rounded-t-xl border-gray-500" @click="" > 
+                    <h1 class="text-4xl border-x border-t bg-blue-300 text-blue-950 p-2 pl-4 rounded-t-xl border-gray-500"
+                        @click="">
                         Membro {{ index + 1 }} da família</h1>
                     <div class="border p-2 rounded-b-xl border-gray-500">
                         <div class="flex flex-col lg:flex-row">
