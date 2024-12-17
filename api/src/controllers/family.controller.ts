@@ -4,11 +4,11 @@ import { familly } from "../config/model/schema";
 import { console } from "inspector";
 
 const createFamily = async (req: Request, res: Response) => {
-    const { name, region, headFamily, numberfamily, idsensor, volume_actual, volume_need } = req.body;
+    const { name, region, head_id, numberfamily, idsensor, volume_actual, volume_need } = req.body;
     try {
         const rows = await db.insert(familly).values({
             name: name,
-            headFamily: headFamily,
+            head_id: head_id,
             numberfamily: numberfamily,
             idsensor: idsensor,
             region: region,
@@ -63,17 +63,17 @@ const viewFamilyName = async (req: Request, res: Response) => {
 
 const updateFamily = async (req: Request, res: Response) => {
     const { id } = req.params
-    const { name, region, headFamily, numberfamily, idsensor, volume_actual, volume_need } = req.body;
+    const { name, region, head_id, numberfamily, idsensor, volume_actual, volume_need } = req.body;
     try {
         const rows = await db.update(familly).set({
             name: name,
-            headFamily: headFamily,
+            head_id: head_id,
             numberfamily: numberfamily,
             idsensor: idsensor,
             region: region,
             volume_actual: volume_actual,
             volume_need: volume_need,
-        }).where(eq(headFamily.id, Number(id)));
+        }).where(eq(head_id.id, Number(id)));
         res.status(200).send({ message: 'Responsável atualizado com sucesso!',
             row: rows
          })

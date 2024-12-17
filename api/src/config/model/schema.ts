@@ -72,7 +72,7 @@ export const address = pgTable("address", {
 export const familly = pgTable("familly",{
     id:integer().primaryKey().generatedAlwaysAsIdentity(),
     name: varchar({ length: 255}),
-    headFamily: integer().references(() => headFamily.id),
+    head_id: integer().references(() => headFamily.id),
     region: varchar({length: 255}),
     numberfamily: integer(),
     idsensor: integer(),
