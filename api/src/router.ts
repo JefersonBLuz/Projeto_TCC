@@ -8,8 +8,9 @@ import Drivers from './routes/drivers.routes';
 import Heads from './routes/headFamily.routes';
 import Members from './routes/familyMember.routes';
 import Family from './routes/family.routes'
+import populationBomb from './config/seed';
 
-
+populationBomb()
 const router = Router()
 const usersRoutes = Users
 const addressRoutes = Address 
