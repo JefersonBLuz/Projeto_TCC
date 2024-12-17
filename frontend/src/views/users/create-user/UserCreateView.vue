@@ -85,7 +85,7 @@ export default {
 </script>
 <template>
     <div class="flex flex-col justify-self-center w-full self-center justify-items-center">
-        <p class="text-5xl mt-5 mb-5">Criação de Usuário</p>
+        <p class="text-5xl mt-5 mb-5">Cadastrar novo usuário</p>
         <hr>
         <main class="justify-center">
             <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
