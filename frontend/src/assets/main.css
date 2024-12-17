@@ -57,6 +57,30 @@
   color: var(--color-text);
   background: var(--color-background);
 }
+[data-edit] {
+  position: relative;
+  font-weight: bold;
+}
+
+[data-edit]:after {
+  display: none;
+  position: absolute;
+  font-size: 12px;
+  top: 100%;
+  padding: 5px;
+  border-radius: 2px;
+  right: calc(60% + 1px );
+  content: attr(data-edit);
+  white-space: nowrap;
+  background-color: rgba(90, 90, 90, 0.973);
+  border: solid 0.5px var(--color-text);
+  color: var(--background-dark-secundaria);
+}
+
+[data-edit]:hover:after {
+  display: block;
+  z-index: 1;
+}
 [data-tooltip] {
   position: relative;
   font-weight: bold;
@@ -106,7 +130,7 @@ button {
   color: black;
 }
 
-a,
+
 .blue {
   text-decoration: none;
   color: var(--color-link-color);
@@ -136,4 +160,7 @@ a,
     display: flex;
     flex-direction: column;
   }
+}
+.test{
+  background-color: rgba(128, 128, 128, 0.116);
 }
