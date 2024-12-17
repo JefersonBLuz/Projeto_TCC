@@ -1,6 +1,6 @@
 <template>
   <Disclosure as="nav" class="bg-gray-800" v-slot="{ open }">
-    <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w px-2 sm:px-6 lg:px-8">
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
@@ -13,58 +13,32 @@
           </DisclosureButton>
         </div>
         <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-          <div class="flex shrink-0 items-center">
+          <a href="/home" class="flex shrink-0 items-center">
             <img class="h-8 w-auto" src="@/assets/Aquasys_logo1.png" alt="Your Company" />
-          </div>
+            <span class="degrader text-3xl">AQUASYS</span>
+          </a>
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4">
               <a v-for="item in navigation" :key="item.name" :href="item.href"
-                :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-sm font-medium']"
+                :class="[item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white', 'rounded-md px-3 py-2 text-base font-medium']"
                 :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
             </div>
           </div>
         </div>
         <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-          <button type="button"
-            class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span class="absolute -inset-1.5" />
-            <span class="sr-only">View notifications</span>
-            <BellIcon class="size-6" aria-hidden="true" />
-          </button>
 
-          <!-- Profile dropdown -->
-          <Menu as="div" class="relative ml-3">
-            <div>
-              <MenuButton
-                class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                <span class="absolute -inset-1.5" />
-                <span class="sr-only">Open user menu</span>
-                <!-- <img class="size-12 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> -->
-              </MenuButton>
-            </div>
-            <transition enter-active-class="transition ease-out duration-100"
-              enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100"
-              leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100"
-              leave-to-class="transform opacity-0 scale-95">
-              <MenuItems
-                class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
-                <MenuItem v-slot="{ active }">
-                <a href="#"
-                  :class="[active ? 'bg-gray-100 outline-none' : '', 'block px-4 py-2 text-sm text-gray-700']">Your
-                  Profile</a>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                <a href="#"
-                  :class="[active ? 'bg-gray-100 outline-none' : '', 'block px-4 py-2 text-sm text-gray-700']">Settings</a>
-                </MenuItem>
-                <MenuItem v-slot="{ active }">
-                <a href="#"
-                  :class="[active ? 'bg-gray-100 outline-none' : '', 'block px-4 py-2 text-sm text-gray-700']">Sign
-                  out</a>
-                </MenuItem>
-              </MenuItems>
-            </transition>
-          </Menu>
+          <div href="" class="flex cursor-pointer" data-edit="Perfil">
+            <iconify-icon icon="material-symbols:account-circle" width="30" height="30" class="pr-1"></iconify-icon>
+            <span class="pr-4 self-center"> Admin</span>
+          </div>
+          <router-link to="/users" class="mx-4">
+            <iconify-icon icon="material-symbols:manage-accounts" width="30" height="30" 
+              data-edit="Usuários"></iconify-icon>
+          </router-link>
+          <router-link to="/" class="ml-4">
+            <iconify-icon icon="material-symbols:logout-rounded" width="30" height="30" 
+              data-edit="Sair"></iconify-icon>
+          </router-link>
         </div>
       </div>
     </div>
@@ -80,13 +54,27 @@
 <script setup>
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 // import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+const themeToggleButton = document.getElementById('theme-toggle');
+const toggleTheme = () => {
+  // Verifica se o body já tem a classe 'dark-mode' para remover ou adicionar
+  if (document.body.classList.contains('dark-mode')) {
+    document.body.classList.remove('dark-mode');
+    localStorage.setItem('theme', 'light'); // Salva a preferência no localStorage
+  } else {
+    document.body.classList.add('dark-mode');
+    localStorage.setItem('theme', 'dark'); // Salva a preferência no localStorage
+  }
+};
+
+
 
 const navigation = [
-  { name: 'Home', href: '/home', current: false },
+  // { name: 'Home', href: '/home', current: false },
   { name: 'Famílias', href: '/family', current: false },
   // { name: 'Graficos', href: '/graf', current: false },
-  // { name: 'Veículos', href: '/', current: false },
-  { name: 'Usuários', href: '/users', current: false },
+  { name: 'Motoristas', href: '/', current: false },
+  { name: 'Veículos', href: '/', current: false },
+  // { name: 'Usuários', href: '/users', current: false },
 ]
 
 </script>
