@@ -1,5 +1,5 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import DriverService from '@/services/Services';
 import AddressService from '@/services/AddressService';
 import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
 
@@ -7,7 +7,7 @@ export default {
     name: 'DriverCreateView',
     data() {
         return {
-            userForm: {
+            driverForm: {
                 name: null,
                 address: 1,
                 birthday: null,
@@ -34,12 +34,12 @@ export default {
         };
     },
     validations: {
-        userForm: {
+        driverForm: {
             name: 'required'
         },
     },
     methods: {
-        handleSubmitUserForm() {
+        handleSubmitDriverForm() {
             this.isSubmitted = true
             console.log('Submit successfull')
         },
@@ -53,14 +53,14 @@ export default {
 
             }
         },
-        async submitNewUser() {
+        async submitNewDriver() {
             try {
                 const response = await this.submitNewAddress()
                 console.log(response);
                 
-                this.userForm.address = response
-                console.log(this.userForm);
-                await UserService.postUser(this.userForm);
+                this.driverForm.address = response
+                console.log(this.driverForm);
+                await DriverService.postDriver(this.driverForm);
                 this.$router.push({
                     name: 'Listar Motoristas'
                 })
@@ -75,61 +75,61 @@ export default {
 <template>
     <div class="flex flex-col justify-self-center">
         <p class="text-5xl mt-5 mb-5">Cadastro de Motorista</p>
-        <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
+        <form v-on:submit.prevent="handleSubmitDriverForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="namedriver">Nome Completo</label>
-                    <input type="text" v-model="userForm.name" :class="{ 'is-invalid': isSubmitted }" id="namedriver"
+                    <input type="text" v-model="driverForm.name" :class="{ 'is-invalid': isSubmitted }" id="namedriver"
                         name="namedriver" placeholder="Nome completo">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="cpf">CPF</label>
-                    <input type="text" v-model="userForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
+                    <input type="text" v-model="driverForm.cpf" id="cpf" name="cpf" placeholder="12312312355">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="birthday">Nascimento</label>
-                    <input type="text" v-model="userForm.birthday" id="birthday" name="birthday"
+                    <input type="text" v-model="driverForm.birthday" id="birthday" name="birthday"
                         placeholder="YYYY-MM-DD">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cellphone">Telefone</label>
-                    <input type="text" v-model="userForm.cellphone" id="cellphone" name="cellphone"
+                    <input type="text" v-model="driverForm.cellphone" id="cellphone" name="cellphone"
                         placeholder="5577912341234">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="email">Email</label>
-                    <input type="text" v-model="userForm.email" id="email" name="email" placeholder="email@email.com">
+                    <input type="text" v-model="driverForm.email" id="email" name="email" placeholder="email@email.com">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cnh_number">Nº CNH</label>
-                    <input type="text" v-model="userForm.cnh_number">
+                    <input type="text" v-model="driverForm.cnh_number">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="cnh_category">Categoria CNH</label>
-                    <input type="text" v-model="userForm.cnh_category">
+                    <input type="text" v-model="driverForm.cnh_category">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="cnh_date">Data Vencimento CNH</label>
-                    <input type="date" v-model="userForm.cnh_date">
+                    <input type="date" v-model="driverForm.cnh_date">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="created_by">Criado por</label>
-                    <input type="text" v-model="userForm.created_by">
+                    <input type="text" v-model="driverForm.created_by">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="updated_by">Atualizado em</label>
-                    <input type="text" v-model="userForm.updated_by">
+                    <input type="text" v-model="driverForm.updated_by">
                 </div>
                 <!-- A opção de Ativo ou Inativo existirá aqui? -->
                 <!-- <div class="flex-1 p-2">
                     <label for="active">Ativo</label>
-                    <input type="checkbox" v-model="userForm.active">
+                    <input type="checkbox" v-model="driverForm.active">
                 </div> -->
             </div>
             <br>
@@ -180,7 +180,7 @@ export default {
             </div>
             <!--Fim endereço-->
             <div class="flex content-center items-center justify-center">
-                <button @click="submitNewUser"
+                <button @click="submitNewdriver"
                     class="blue bg-blue-300 justify-self-center w-1/3 text-xl h-12 rounded-lg"
                     type="submit">Enviar</button>
             </div>

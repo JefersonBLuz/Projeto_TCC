@@ -1,13 +1,13 @@
 <script lang="ts">
-import UserService from '@/services/UsersService';
+import TruckService from '@/services/Services';
 import AddressService from '@/services/AddressService';
 import AddressCreateComponent from '@/components/address/create-address/AddressCreateComponent.vue';
 
 export default {
-    name: 'UserCreateView',
+    name: 'TruckCreateView',
     data() {
         return {
-            userForm: {
+            truckForm: {
                 plate: null,
                 model: null,
                 year: null,
@@ -19,19 +19,19 @@ export default {
         };
     },
     validations: {
-        userForm: {
+        truckForm: {
             name: 'required'
         },
     },
     methods: {
-        handleSubmitUserForm() {
+        handleSubmitTruckForm() {
             this.isSubmitted = true
             console.log('Submit successfull')
         },
-        async submitNewUser() {
+        async submitNewtruck() {
             try {
-                console.log(this.userForm);
-                await UserService.postUser(this.userForm);
+                console.log(this.truckForm);
+                await truckService.posttruck(this.truckForm);
                 this.$router.push({
                     name: 'Listar Caminhões'
                 })
@@ -46,38 +46,38 @@ export default {
 <template>
     <div class="flex flex-col justify-self-center">
         <p class="text-5xl mt-5 mb-5">Cadastrar Caminhão</p>
-        <form v-on:submit.prevent="handleSubmitUserForm()" method="post">
+        <form v-on:submit.prevent="handleSubmitTruckForm()" method="post">
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="plate">Placa</label>
-                    <input type="text" v-model="userForm.plate" :class="{ 'is-invalid': isSubmitted }" id="nameuser"
+                    <input type="text" v-model="truckForm.plate" :class="{ 'is-invalid': isSubmitted }" id="plateTruck"
                         name="plate" placeholder="Placa">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="birthday">Modelo</label>
-                    <input type="text" v-model="userForm.model" id="model" name="model"
+                    <input type="text" v-model="truckForm.model" id="model" name="model"
                         placeholder="Modelo">
                 </div>
                 <div class="flex-1 p-2">
                     <label for="year">Ano</label>
-                    <input type="text" v-model="userForm.year" id="yeah" name="yeah"
+                    <input type="text" v-model="truckForm.year" id="yeah" name="yeah"
                         placeholder="YYYY">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cpf">Proprietário</label>
-                    <input type="text" v-model="userForm.owner" id="cpf" name="owner" placeholder="Proprietário">
+                    <input type="text" v-model="truckForm.owner" id="cpf" name="owner" placeholder="Proprietário">
                 </div>
             </div>
             <div class="flex">
                 <div class="flex-1 p-2">
                     <label for="cretead_by">Criado por</label>
-                    <input type="text" v-model="userForm.created_by" id="cretead_by" name="cretead_by" placeholder="Criado Por">
+                    <input type="text" v-model="truckForm.created_by" id="cretead_by" name="cretead_by" placeholder="Criado Por">
                 </div>
                 <div class="flex-1 p-2">
-                    <label for="password">Alterado em</label>
-                    <input type="password" v-model="userForm.updated_by" id="updated_by" name="updated_by" placeholder="Alterado Por">
+                    <label for="updated_by">Alterado em</label>
+                    <input type="text" v-model="truckForm.updated_by" id="updated_by" name="updated_by" placeholder="Alterado Por">
                 </div>
             </div>
         </form>
