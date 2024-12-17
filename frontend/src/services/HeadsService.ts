@@ -32,9 +32,9 @@ const getHead = async () => {
  * Método responsável por listar 'Usuário' por 'name' sem 'Address'.
  * (GET): localhost:3000/users/view/:name
  */
-const getHeadName = async (name: string) => {
+const getHeadID = async (id: number) => {
     try {
-        const response = await fetch(`http://localhost:8082/heads/list-head/${name}`, {
+        const response = await fetch(`http://localhost:8082/heads/view/${id}`, {
             method: 'get',
             headers: {
                 'Content-Type': 'application/json'
@@ -138,6 +138,27 @@ const getHeadAddressAll = async () => {
         return console.error('Erro: ', error)
     }
 }
+/**
+ * Método responsável por listar todas Fámilias com membros.
+ * (GET): localhost:3000/heads/viewHeads/:name
+ */
+const getHeadWhitMemberAll = async () => {
+    try {
+        const response = await fetch(`http://localhost:8082/heads/viewMembers`, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+        if (!response) {
+            return 'Vazio'
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        return console.error('Erro: ', error)
+    }
+}
 
 /**
  * Método responsável por listar 'Usuário' por 'name' com 'Address'.
@@ -176,4 +197,4 @@ const getHeadAddressId = async (id: string) => {
         return console.error('Erro: ', error)
     }
 }
-export default { postHead, getHead, getHeadName, updateHead, deleteHead, getHeadAddressAll, getHeadAddress, getHeadAddressId }
+export default { postHead, getHead, getHeadID, updateHead, deleteHead, getHeadAddressAll, getHeadAddress, getHeadAddressId, getHeadWhitMemberAll }

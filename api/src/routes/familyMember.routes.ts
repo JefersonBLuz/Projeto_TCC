@@ -11,6 +11,8 @@ router.get('/view', membersController.viewMembersAll)
 
 router.get('/view/:id', membersController.viewMember)
 
+router.get('/viewofHead/:id', membersController.viewMemberAllOfHead)
+
 router.get('/viewHeads', membersController.viewMembersAllWithHead)
 
 router.get('/viewHeads/:id', membersController.viewMemberWithHead)

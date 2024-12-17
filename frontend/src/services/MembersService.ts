@@ -27,7 +27,46 @@ const getMember = async () => {
         return console.error('Erro: ', error)
     }
 };
+/**
+ * Método responsável por listar todos os 'Usuários' com 'Head'.
+ * (GET): localhost:3000/users/view
+ */
+const getMemberWhitHead = async () => {
+    try {
+        const response = await fetch('http://localhost:8082/members/viewHeads', {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response) {
+            return 'Vazio'
+        }
+        const res = await response.json();
+        return res;
+    } catch (error) {
+        return console.error('Erro: ', error)
+    }
+};
 
+/**
+ * Método responsável por listar 'Usuário' por 'name' sem 'Address'.
+ * (GET): localhost:3000/users/view/:name
+ */
+const getMemberOfHead = async (id: number) => {
+    try {
+        const response = await fetch(`http://localhost:8082/members/viewofHead/${id}`, {
+            method: 'get',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const res = await response.json()
+        return res;
+    } catch (error) {
+        return console.error('Erro: ', error)
+    }
+};
 /**
  * Método responsável por listar 'Usuário' por 'name' sem 'Address'.
  * (GET): localhost:3000/users/view/:name
@@ -175,4 +214,4 @@ const getMemberAddressId = async (id: string) => {
         return console.error('Erro: ', error)
     }
 }
-export default { postMember, getMember, getMemberName, updateMember, deleteMember, getMemberAddressAll, getMemberAddress, getMemberAddressId }
+export default { postMember, getMember, getMemberName, getMemberOfHead, updateMember, deleteMember, getMemberAddressAll, getMemberAddress, getMemberAddressId, getMemberWhitHead }

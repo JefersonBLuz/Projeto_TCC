@@ -59,6 +59,20 @@ const viewMember = async (req: Request, res: Response) => {
         });
     }
 }
+const viewMemberAllOfHead = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const rows = await db.select().from(familyMember).where(eq(familyMember.head_id, Number(id))
+        );
+        res.status(200).send(rows);
+    } catch (error) {
+        console.log('viewMember: ', error);
+        res.status(500).send({
+            message: 'Ocorreu um erro.',
+            error: error
+        });
+    }
+}
 
 const viewMembersAllWithAddress = async (req: Request, res: Response) => {
     try {
@@ -155,4 +169,4 @@ const deleteMember = async (req: Request, res: Response) => {
     }
 }
 
-export default { createMember, viewMembersAll, viewMember, viewMembersAllWithAddress, viewMemberWithAddress, viewMembersAllWithHead, viewMemberWithHead, updateMember, deleteMember }
+export default { createMember, viewMembersAll, viewMemberAllOfHead, viewMember, viewMembersAllWithAddress, viewMemberWithAddress, viewMembersAllWithHead, viewMemberWithHead, updateMember, deleteMember }
