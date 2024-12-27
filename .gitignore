@@ -31,4 +31,5 @@ package-lock.json
 *.tsbuildinfo
 
 # Enviroment variables
-.env
+* .env
+sql

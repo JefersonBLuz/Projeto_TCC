@@ -1,0 +1,55 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint . --fix",
+    "build": "tsc",
+    "dev": "nodemon ./src/index.ts",
+    "test": "jest --coverage",
+    "db:push": "npx drizzle-kit push",
+    "db:gen": "npx drizzle-kit generate",
+    "db:mig": "npx drizzle-kit migrate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https:"
+  },
+  "keywords": [
+    "nodejs",
+    "API",
+    "CRUD",
+    "express",
+    "postgressql",
+    "typescript"
+  ],
+  "author": "Jeferson Braga",
+  "license": "MIT",
+  "description": "Aplicação CRUD API em Node.js",
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.1",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.28.1",
+    "eslint": "^9.16.0",
+    "express": "^4.21.1",
+    "globals": "^15.12.0",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.7",
+    "ts-jest": "^29.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.2",
+    "typescript-eslint": "^8.16.0"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.36.4",
+    "pg": "^8.13.1",
+    "pinia": "^2.2.6",
+    "postgres": "^3.4.5"
+  }
+}

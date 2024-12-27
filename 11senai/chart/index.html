@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="src/style.css">
+
+  <!-- <link rel="stylesheet" href="http://openlayers.org/en/v3.10.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.10.1/build/ol.js"></script> -->
+
+  <!-- In <head> -->
+  <link href="https://refreshless.com/nouislider/dist/nouislider.css?v=1581" rel="stylesheet">
+  <script src="https://refreshless.com/nouislider/dist/nouislider.js?v=1581"></script>
+
+
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/modules/exporting.js"></script>
+  <script src="https://code.highcharts.com/modules/export-data.js"></script>
+  <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v8.2.0/ol.css">
+  <script src="https://cdn.jsdelivr.net/npm/ol@v8.2.0/dist/ol.js"></script>
+
+
+</head>
+
+<body>
+  <div class="container-chart">
+    <div class="periodo">
+      <b>Período</b>
+      <div id="slider"></div>
+      <script>
+
+
+
+
+        function timestamp(str) {
+          return new Date(str).getTime();
+        }
+
+
+        // portuguese day format
+        function nth(d) {
+          if (d > 0 && d < 2) return 'º de';
+          if (d > 1) return ' de';
+        }
+
+        function formatDate(date) {
+          return date.toISOString().slice(0, 10)
+        }
+
+        var date = new Date();
+
+        // set previous month
+        var previousMonth = new Date();
+        previousMonth.setMonth(previousMonth.getMonth() - 1);
+
+        var dateSlider = document.getElementById('slider');
+
+        function toFormat(v) {
+          return formatDate(new Date(v));
+        }
+
+        // nouislider settings
+        noUiSlider.create(dateSlider, {
+          behaviour: 'tap',
+          connect: true,
+          tooltips: [true, true],
+          format: { to: toFormat, from: Number },
+          range: {
+            min: timestamp(date) - 5 * 360 * 24 * 60 * 60 * 1000,
+            max: timestamp(date)
+          },
+          step: 1 * 24 * 60 * 60 * 1000,
+          start: [timestamp(previousMonth), timestamp(date)]
+        });
+
+        // get range infos at html          
+        var dateValues = [
+          document.getElementById('event-start'), document.getElementById('event-end')
+        ];
+
+        dateSlider.noUiSlider.on('update', function (values, handle) {
+          dateValues[handle].innerHTML = values[handle];
+        });
+
+
+
+
+
+
+      </script>
+
+    </div>
+    <div class="medias">
+      <div class="media1">
+        <b>Media 1</b>
+        <div class="media">3.333</div>
+        <span>Litros</span>
+      </div>
+      <div class="media2">
+        <b>Media 2</b>
+        <div class="media">4.322</div>
+        <span>Litros</span>
+      </div>
+    </div>
+    <div class="abastecidos">
+      <!-- <b>Abastecidos</b> -->
+      <div id="chart-abastecidos"></div>
+    </div>
+    <div class="percentual">
+      <!-- <b>Percentual</b> -->
+      <div id="chart-percentual"></div>
+      <span id="percentual-text">85%</span>
+
+    </div>
+
+    <div class="familias">
+      <!-- <b>Familias</b> -->
+      <table>
+        <tr>
+          <th>FAMILIA</th>
+          <th>Abastecido</th>
+          <th>%</th>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>100</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+
+
+        <tr>
+          <td>Peter</td>
+          <td>14.000</td>
+          <td>65%</td>
+        </tr>
+      </table>
+
+    </div>
+    <div class="informacao">
+      <!-- <b>Informacao</b> -->
+      <div id="chart-informacao"></div>
+    </div>
+    <div class="mapa">
+      <!-- <b>Mapa</b> -->
+      <div id="map"></div>
+
+    </div>
+
+  </div>
+
+  <script src="src/script.js"></script>
+</body>
+
+</html>
