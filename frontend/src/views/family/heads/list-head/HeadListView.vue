@@ -102,13 +102,13 @@ export default {
                     <div class="flex-1 px-8 text-xl">
                         <span v-if="familyList.percentual >= 0.7" class="text-green-500">
                             
-                            {{ familyList.percentual * 100 + "%" }} do Vomule máx.
+                            {{ parseInt(familyList.percentual * 100).toFixed(0) + "%" }} do Volume máx.
                         </span>
                         <span v-else-if="familyList.percentual > 0.3" class="text-yellow-500">
-                            {{ familyList.percentual * 100 + "%" }} do Vomule máx.
+                            {{ parseInt(familyList.percentual * 100).toFixed(0) + "%" }} do Volume máx.
                         </span>
                         <span v-else class="text-red-500">
-                            {{ familyList.percentual * 100 + "%" }} do Vomule máx.
+                            {{ parseInt(familyList.percentual * 100).toFixed(0) + "%" }} do Volume máx.
                         </span>
                     </div>
                     <!--Fim Volume-->
@@ -159,7 +159,7 @@ export default {
 
                     <!-- </div> -->
                 </div>
-                 <!--Fim Informação-->
+                <!--Fim Informação-->
                 <div v-for="(headFamily, idx) in familyList.head" :key="idx">
                     <h2
                         class="text-2xl py-1 border-x border-t bg-blue-300 text-blue-950 pl-4 rounded-t-xl border-gray-500">
