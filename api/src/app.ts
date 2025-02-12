@@ -1,6 +1,7 @@
 import express from 'express'
 import cors from 'cors'
 import router from './router'
+import { populationBomb } from './config/seed'
 
 export class App {
     private server: express.Application
@@ -8,6 +9,7 @@ export class App {
     constructor() {
         this.server = express()
         this.middleware()
+        // this.seed()
         this.router()
     }
     private middleware(){
@@ -20,5 +22,8 @@ export class App {
     }
     public getServer(): express.Application {
         return this.server
+    }
+    private async seed(){
+      await populationBomb()
     }
 }
