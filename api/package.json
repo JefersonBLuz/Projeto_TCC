@@ -31,6 +31,7 @@
     "@types/bcrypt": "^5.0.2",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "@types/express-session": "^1.18.1",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.10.1",
     "@types/pg": "^8.11.10",
@@ -50,6 +51,7 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.36.4",
+    "express-session": "^1.18.1",
     "pg": "^8.13.1",
     "pinia": "^2.2.6",
     "postgres": "^3.4.5"
