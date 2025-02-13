@@ -10,7 +10,7 @@ import { db, eq } from "../config/db";
 import { users } from "../config/model/schema";
 
 
-const login = async (req: Request, res: Response) => {
+const login = async (req: Request, res: Response): Promise<any> => {
     const { username, password } = req.body;
 
     if (!username || !password) return res.status(400).send({ message: 'Invalid data.' });
@@ -37,3 +37,5 @@ const login = async (req: Request, res: Response) => {
         return res.status(500).send({ message: 'An error occurred.', error });
     }
 }
+
+export { login }
